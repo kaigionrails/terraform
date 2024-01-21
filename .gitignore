@@ -1,0 +1,5 @@
+# https://github.com/hashicorp/terraform-guides/blob/master/.gitignore
+*.tfstate
+*.tfstate.backup
+*.tfstate.lock.info
+.terraform/
