@@ -165,7 +165,7 @@ resource "cloudflare_record" "spf" {
   zone_id = cloudflare_zone.kaigionrails_org.id
   name    = "kaigionrails.org"
   type    = "TXT"
-  value   = "v=spf1 include:mailgun.org ~all"
+  value   = "v=spf1 include:mailgun.org include:_spf.google.com ~all"
   ttl     = 1
 }
 
