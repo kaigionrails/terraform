@@ -36,9 +36,12 @@ resource "cloudflare_record" "cname_2023" {
   ttl     = 300
 }
 
-import {
-  to = cloudflare_record.cname_2023
-  id = "13373bcb6ae8d714dc8b48e6204df945/ac1e9c18601c60e5d6c647e2d22d3efe"
+resource "cloudflare_record" "cname_2024" {
+  zone_id = cloudflare_zone.kaigionrails_org.id
+  name    = "2024"
+  type    = "CNAME"
+  value   = "kaigionrails.github.io"
+  ttl     = 300
 }
 
 resource "cloudflare_record" "google_verify" {
