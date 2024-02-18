@@ -78,14 +78,6 @@ resource "cloudflare_record" "cfp_app" {
   ttl     = 1
 }
 
-resource "cloudflare_record" "kaigionrails_org" {
-  zone_id = cloudflare_zone.kaigionrails_org.id
-  name    = "kaigionrails.org"
-  type    = "CNAME"
-  value   = "mammalian-snail-4nwu8u68e7a4592btwe8ztwq.herokudns.com"
-  ttl     = 1
-}
-
 resource "cloudflare_record" "past" {
   zone_id = cloudflare_zone.kaigionrails_org.id
   name    = "past"
