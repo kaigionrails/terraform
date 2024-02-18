@@ -180,3 +180,10 @@ resource "cloudflare_record" "dkim" {
   ttl     = 1
 }
 
+# TODO: cannot import...
+# resource "cloudflare_worker_domain" "kor_router" {
+#   account_id = var.cloudflare_account_id
+#   zone_id    = cloudflare_zone.kaigionrails_org.id
+#   hostname   = "kaigionrails.org"
+#   service    = "kor-router"
+# }
