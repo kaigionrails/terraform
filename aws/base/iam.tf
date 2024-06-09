@@ -33,6 +33,7 @@ data "aws_iam_policy_document" "GhaDockerPushToEcrPolicy" {
     effect = "Allow"
     actions = [
       "ecr:BatchCheckLayerAvailability",
+      "ecr:BatchGetImage",
       "ecr:GetDownloadUrlForLayer",
       "ecr:GetRepositoryPolicy",
       "ecr:DescribeRepositories",
