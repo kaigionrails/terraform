@@ -164,14 +164,6 @@ data "aws_iam_policy_document" "conference_app_deployer_trust" {
       values   = ["repo:kaigionrails/conference-app:*"]
     }
   }
-  statement {
-    effect  = "Allow"
-    actions = ["sts:AssumeRole"]
-    principals {
-      type        = "AWS"
-      identifiers = ["arn:aws:iam::${local.kaigionrails_aws_account_id}:role/OrganizationAccountAccessRole"]
-    }
-  }
 }
 
 resource "aws_iam_role_policy" "conference_app_deployer" {
