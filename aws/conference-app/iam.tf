@@ -242,4 +242,11 @@ data "aws_iam_policy_document" "conference_app_deployer" {
       aws_iam_role.conference_app.arn
     ]
   }
+  statement {
+    effect = "Allow"
+    actions = [
+      "apprunner:UpdateService"
+    ]
+    resources = [aws_apprunner_service.conference_app.arn]
+  }
 }
