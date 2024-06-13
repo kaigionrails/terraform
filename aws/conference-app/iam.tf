@@ -159,7 +159,7 @@ data "aws_iam_policy_document" "conference_app_deployer_trust" {
       identifiers = [data.aws_iam_openid_connect_provider.github_actions.arn]
     }
     condition {
-      test     = "StringEquals"
+      test     = "StringLike"
       variable = "token.actions.githubusercontent.com:sub"
       values   = ["repo:kaigionrails/conference-app:*"]
     }
