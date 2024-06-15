@@ -103,8 +103,35 @@ resource "cloudflare_record" "cfp_app" {
   zone_id = cloudflare_zone.kaigionrails_org.id
   name    = "cfp"
   type    = "CNAME"
-  value   = "fundamental-bedbug-0etq6gplqbbvcenmoum4b7fd.herokudns.com"
+  value   = "qt3zbts8fe.us-west-2.awsapprunner.com"
   ttl     = 1
+}
+
+resource "cloudflare_record" "cfp_app_cert_valid_1" {
+  zone_id = cloudflare_zone.kaigionrails_org.id
+  name    = "_dd32d11fedb954e6e4cc9415bebd3e7e.cfp"
+  type    = "CNAME"
+  value   = "_3c18da2155d59ba16c7ad38d510659f8.sdgjtdhdhz.acm-validations.aws."
+  ttl     = 3600
+  comment = "For domain validation by AWS"
+}
+
+resource "cloudflare_record" "cfp_app_cert_valid_2" {
+  zone_id = cloudflare_zone.kaigionrails_org.id
+  name    = "_22d9373d5a624fa20ef7e95c7002f054.2a57j78d05nkylnjxxxbsfyb1hqpih3.cfp"
+  type    = "CNAME"
+  value   = "_597ba04efb7103226f09e0cadac39ebc.sdgjtdhdhz.acm-validations.aws."
+  ttl     = 3600
+  comment = "For domain validation by AWS"
+}
+
+resource "cloudflare_record" "cfp_app_cert_valid_3" {
+  zone_id = cloudflare_zone.kaigionrails_org.id
+  name    = "_84259321a368ac89024575c5164a6d03.www.cfp"
+  type    = "CNAME"
+  value   = "_642ac4dd88b62c4d8a01a858bc7cff76.sdgjtdhdhz.acm-validations.aws."
+  ttl     = 3600
+  comment = "For domain validation by AWS"
 }
 
 resource "cloudflare_record" "past" {

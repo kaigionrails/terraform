@@ -111,3 +111,9 @@ data "aws_iam_policy_document" "cfp_app_apprunner" {
     resources = [aws_ecr_repository.cfp_app.arn]
   }
 }
+
+resource "aws_apprunner_custom_domain_association" "cfp_app" {
+  provider    = aws.usw2
+  service_arn = aws_apprunner_service.cfp_app.arn
+  domain_name = "cfp.kaigionrails.org"
+}
