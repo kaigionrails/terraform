@@ -52,14 +52,43 @@ resource "cloudflare_record" "google_verify" {
   ttl     = 1
 }
 
+## conference app
 resource "cloudflare_record" "conference_app_production" {
   zone_id = cloudflare_zone.kaigionrails_org.id
   name    = "app"
   type    = "CNAME"
-  value   = "theoretical-jicama-ldobxwqr6ver1yq7xhcz710m.herokudns.com"
+  value   = "an5i3pv4yg.us-west-2.awsapprunner.com"
   ttl     = 1
   proxied = true
 }
+
+resource "cloudflare_record" "conference_app_cert_valid_1" {
+  zone_id = cloudflare_zone.kaigionrails_org.id
+  name    = "_72e72ca487543b43f54be4e6c49247d2.app"
+  type    = "CNAME"
+  value   = "_4fd9b2812b4c1554aed67b4a5e59ae32.sdgjtdhdhz.acm-validations.aws."
+  ttl     = 3600
+  comment = "For domain validation by AWS"
+}
+
+resource "cloudflare_record" "conference_app_cert_valid_2" {
+  zone_id = cloudflare_zone.kaigionrails_org.id
+  name    = "_bdc1563341fb0347f4bbf4c26a60ca67.www.app"
+  type    = "CNAME"
+  value   = "_e06c70a7b05558bb348a25013aa21119.sdgjtdhdhz.acm-validations.aws."
+  ttl     = 3600
+  comment = "For domain validation by AWS"
+}
+
+resource "cloudflare_record" "conference_app_cert_valid_3" {
+  zone_id = cloudflare_zone.kaigionrails_org.id
+  name    = "_d6b85c8010b53f60c92bb88d424d7af2.2a57j77vgoemr8puv5ikbogcmcui9fd.app"
+  type    = "CNAME"
+  value   = "_7961062668e4d2d18b0b8e023b7eb14b.sdgjtdhdhz.acm-validations.aws."
+  ttl     = 3600
+  comment = "For domain validation by AWS"
+}
+## end conference app
 
 resource "cloudflare_record" "conference_app_staging" {
   zone_id = cloudflare_zone.kaigionrails_org.id

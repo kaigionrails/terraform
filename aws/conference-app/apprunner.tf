@@ -115,3 +115,9 @@ data "aws_iam_policy_document" "conference_app_apprunner" {
     resources = [aws_ecr_repository.conference_app.arn]
   }
 }
+
+resource "aws_apprunner_custom_domain_association" "conference_app" {
+  provider    = aws.usw2
+  service_arn = aws_apprunner_service.conference_app.arn
+  domain_name = "app.kaigionrails.org"
+}
