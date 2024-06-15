@@ -242,11 +242,11 @@ data "aws_iam_policy_document" "cfp_app_deployer" {
       aws_iam_role.cfp_app.arn
     ]
   }
-  # statement {
-  #   effect = "Allow"
-  #   actions = [
-  #     "apprunner:UpdateService"
-  #   ]
-  #   resources = [aws_apprunner_service.cfp_app.arn]
-  # }
+  statement {
+    effect = "Allow"
+    actions = [
+      "apprunner:UpdateService"
+    ]
+    resources = [aws_apprunner_service.cfp_app.arn]
+  }
 }
