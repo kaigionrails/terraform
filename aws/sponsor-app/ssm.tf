@@ -48,6 +48,16 @@ resource "aws_ssm_parameter" "sponsor_app_github_client_secret" {
   }
 }
 
+resource "aws_ssm_parameter" "sponsor_app_github_repo" {
+  provider = aws.usw2
+  name     = "/sponsor-app/GITHUB_REPO"
+  type     = "SecureString"
+  value    = "GITHUB_REPO"
+  lifecycle {
+    ignore_changes = [value]
+  }
+}
+
 resource "aws_ssm_parameter" "sponsor_app_google_cloud_credentials" {
   provider = aws.usw2
   name     = "/sponsor-app/GOOGLE_CLOUD_CREDENTIALS"
