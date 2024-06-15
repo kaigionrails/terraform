@@ -242,11 +242,11 @@ data "aws_iam_policy_document" "sponsor_app_deployer" {
       aws_iam_role.sponsor_app.arn
     ]
   }
-  # statement {
-  #   effect = "Allow"
-  #   actions = [
-  #     "apprunner:UpdateService"
-  #   ]
-  #   resources = [aws_apprunner_service.sponsor_app.arn]
-  # }
+  statement {
+    effect = "Allow"
+    actions = [
+      "apprunner:UpdateService"
+    ]
+    resources = [aws_apprunner_service.sponsor_app.arn]
+  }
 }
