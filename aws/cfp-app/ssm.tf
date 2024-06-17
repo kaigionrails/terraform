@@ -58,6 +58,16 @@ resource "aws_ssm_parameter" "cfp_app_secret_key_base" {
   }
 }
 
+resource "aws_ssm_parameter" "cfp_app_sentry_dsn" {
+  provider = aws.usw2
+  name     = "/cfp-app/SENTRY_DSN"
+  type     = "SecureString"
+  value    = "SENTRY_DSN"
+  lifecycle {
+    ignore_changes = [value]
+  }
+}
+
 resource "aws_ssm_parameter" "cfp_app_slack_webhook_url" {
   provider = aws.usw2
   name     = "/cfp-app/SLACK_WEBHOOK_URL"
