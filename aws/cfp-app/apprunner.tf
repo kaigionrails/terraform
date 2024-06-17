@@ -17,6 +17,7 @@ resource "aws_apprunner_service" "cfp_app" {
           RAILS_ENV                = "production"
           RAILS_LOG_TO_STDOUT      = "enabled"
           RAILS_SERVE_STATIC_FILES = "enabled"
+          SENTRY_ENV               = "production"
           TIMEZONE                 = "Asia/Tokyo"
         }
 
@@ -28,6 +29,7 @@ resource "aws_apprunner_service" "cfp_app" {
           REDIS_TLS_URL     = aws_ssm_parameter.cfp_app_redis_tls_url.arn
           REDIS_URL         = aws_ssm_parameter.cfp_app_redis_url.arn
           SECRET_KEY_BASE   = aws_ssm_parameter.cfp_app_secret_key_base.arn
+          SENTRY_DSN        = aws_ssm_parameter.cfp_app_sentry_dsn.arn
           SLACK_WEBHOOK_URL = aws_ssm_parameter.cfp_app_slack_webhook_url.arn
           SMTP_ADDRESS      = aws_ssm_parameter.cfp_app_smtp_address.arn
           SMTP_DOMAIN       = aws_ssm_parameter.cfp_app_smtp_domain.arn

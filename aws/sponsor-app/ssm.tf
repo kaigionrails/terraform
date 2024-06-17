@@ -148,6 +148,16 @@ resource "aws_ssm_parameter" "sponsor_app_secret_key_base" {
   }
 }
 
+resource "aws_ssm_parameter" "sponsor_app_sentry_dsn" {
+  provider = aws.usw2
+  name     = "/sponsor-app/SENTRY_DSN"
+  type     = "SecureString"
+  value    = "SENTRY_DSN"
+  lifecycle {
+    ignore_changes = [value]
+  }
+}
+
 resource "aws_ssm_parameter" "sponsor_app_slack_webhook_url" {
   provider = aws.usw2
   name     = "/sponsor-app/SLACK_WEBHOOK_URL"
