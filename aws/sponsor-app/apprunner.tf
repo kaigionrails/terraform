@@ -22,6 +22,7 @@ resource "aws_apprunner_service" "sponsor_app" {
           RAILS_ENV                = "production"
           RAILS_LOG_TO_STDOUT      = "enabled"
           RAILS_SERVE_STATIC_FILES = "enabled"
+          SENTRY_ENV               = "production"
         }
 
         # See also kaigionrails/sponsor-app/deploy/task_definition.jsonnet
@@ -41,6 +42,7 @@ resource "aws_apprunner_service" "sponsor_app" {
           REDIS_URL                 = aws_ssm_parameter.sponsor_app_redis_url.arn
           S3_FILES_BUCKET           = aws_ssm_parameter.sponsor_app_s3_files_bucket.arn
           SECRET_KEY_BASE           = aws_ssm_parameter.sponsor_app_secret_key_base.arn
+          SENTRY_DSN                = aws_ssm_parameter.sponsor_app_sentry_dsn.arn
           SLACK_WEBHOOK_URL         = aws_ssm_parameter.sponsor_app_slack_webhook_url.arn
           TITO_API_TOKEN            = aws_ssm_parameter.sponsor_app_tito_api_token.arn
         }
