@@ -219,6 +219,7 @@ data "aws_iam_policy_document" "cfp_app_deployer" {
       "ecs:List*",
       "ecr:List*",
       "ssm:GetParameters",
+      "apprunner:DescribeService",
     ]
     resources = ["*"]
   }
