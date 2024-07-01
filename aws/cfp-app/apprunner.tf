@@ -13,6 +13,8 @@ resource "aws_apprunner_service" "cfp_app" {
           AWS_S3_BUCKET            = "sample"
           AWS_SECRET_ACCESS_KEY    = "sample"
           LANG                     = "en_US.UTF-8"
+          MAIL_FROM                = "noreply@kaigionrails.org"
+          MAIL_HOST                = "cfp.kaigionrails.org"
           RACK_ENV                 = "production"
           RAILS_ENV                = "production"
           RAILS_LOG_TO_STDOUT      = "enabled"
