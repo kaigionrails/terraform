@@ -138,6 +138,16 @@ data "aws_iam_policy_document" "cfp_app" {
     actions   = ["kms:Decrypt"]
     resources = [data.aws_kms_key.usw2_ssm.arn]
   }
+  statement {
+    effect = "Allow"
+    actions = [
+      "ssmmessages:CreateControlChannel",
+      "ssmmessages:CreateDataChannel",
+      "ssmmessages:OpenControlChannel",
+      "ssmmessages:OpenDataChannel",
+    ]
+    resources = ["*"]
+  }
 }
 
 resource "aws_iam_role" "cfp_app_deployer" {
