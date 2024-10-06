@@ -319,6 +319,16 @@ resource "aws_ssm_parameter" "sponsor_app_staging_s3_files_bucket" {
   }
 }
 
+resource "aws_ssm_parameter" "sponsor_app_staging_s3_files_prefix" {
+  provider = aws.usw2
+  name     = "/sponsor-app-staging/S3_FILES_PREFIX"
+  type     = "SecureString"
+  value    = "S3_FILES_PREFIX"
+  lifecycle {
+    ignore_changes = [value]
+  }
+}
+
 resource "aws_ssm_parameter" "sponsor_app_staging_secret_key_base" {
   provider = aws.usw2
   name     = "/sponsor-app-staging/SECRET_KEY_BASE"
