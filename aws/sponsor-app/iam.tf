@@ -53,14 +53,20 @@ data "aws_iam_policy_document" "ecs_exec_sponsor_app" {
       "logs:CreateLogStream",
       "logs:PutLogEvents",
     ]
-    resources = ["${aws_cloudwatch_log_group.sponsor_app_worker.arn}*"]
+    resources = [
+      "${aws_cloudwatch_log_group.sponsor_app_worker.arn}*",
+      "${aws_cloudwatch_log_group.sponsor_app_staging_worker.arn}*",
+    ]
   }
   statement {
     effect = "Allow"
     actions = [
       "ssm:GetParameters",
     ]
-    resources = ["arn:aws:ssm:*:${local.kaigionrails_aws_account_id}:parameter/sponsor-app/*"]
+    resources = [
+      "arn:aws:ssm:*:${local.kaigionrails_aws_account_id}:parameter/sponsor-app/*",
+      "arn:aws:ssm:*:${local.kaigionrails_aws_account_id}:parameter/sponsor-app-staging/*"
+    ]
   }
   statement {
     effect = "Allow"
@@ -130,7 +136,8 @@ data "aws_iam_policy_document" "sponsor_app" {
     effect  = "Allow"
     actions = ["ssm:GetParameters"]
     resources = [
-      "arn:aws:ssm:*:${local.kaigionrails_aws_account_id}:parameter/sponsor-app/*"
+      "arn:aws:ssm:*:${local.kaigionrails_aws_account_id}:parameter/sponsor-app/*",
+      "arn:aws:ssm:*:${local.kaigionrails_aws_account_id}:parameter/sponsor-app-staging/*"
     ]
   }
   statement {
