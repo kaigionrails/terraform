@@ -255,6 +255,9 @@ data "aws_iam_policy_document" "sponsor_app_deployer" {
     actions = [
       "apprunner:UpdateService"
     ]
-    resources = [aws_apprunner_service.sponsor_app.arn]
+    resources = [
+      aws_apprunner_service.sponsor_app.arn,
+      aws_apprunner_service.sponsor_app_staging.arn
+    ]
   }
 }
