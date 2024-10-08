@@ -177,6 +177,41 @@ resource "cloudflare_record" "sponsor_app_cert_valid_3" {
   comment = "For domain validation by AWS"
 }
 
+resource "cloudflare_record" "sponsor_app_staging" {
+  zone_id = cloudflare_zone.kaigionrails_org.id
+  name    = "sponsorships-staging"
+  type    = "CNAME"
+  value   = "mqimrwkkmv.us-west-2.awsapprunner.com"
+  ttl     = 1
+}
+
+resource "cloudflare_record" "sponsor_app_staging_cert_valid_1" {
+  zone_id = cloudflare_zone.kaigionrails_org.id
+  name    = "_d509abfe803fcfeacbfeca75a94d3b77.sponsorships-staging"
+  type    = "CNAME"
+  value   = "_3028803a29db1eca8f4b48dd9386c90e.djqtsrsxkq.acm-validations.aws."
+  ttl     = 3600
+  comment = "For domain validation by AWS"
+}
+
+resource "cloudflare_record" "sponsor_app_staging_cert_valid_2" {
+  zone_id = cloudflare_zone.kaigionrails_org.id
+  name    = "_61385ddf0e6168d65ae3274923a398bf.www.sponsorships-staging"
+  type    = "CNAME"
+  value   = "_96a1862018da72b49f22c4d2604f8c21.djqtsrsxkq.acm-validations.aws."
+  ttl     = 3600
+  comment = "For domain validation by AWS"
+}
+
+resource "cloudflare_record" "sponsor_app_staging_cert_valid_3" {
+  zone_id = cloudflare_zone.kaigionrails_org.id
+  name    = "_0513043377f006d7e113da6036cbbd3b.2a57j77vgoemr8puv5ikbogcmcui9fd.sponsorships-staging"
+  type    = "CNAME"
+  value   = "_88381f30338a1e2abbfbf47b63042307.djqtsrsxkq.acm-validations.aws."
+  ttl     = 3600
+  comment = "For domain validation by AWS"
+}
+
 resource "cloudflare_record" "mx_google" {
   zone_id  = cloudflare_zone.kaigionrails_org.id
   name     = "kaigionrails.org"
