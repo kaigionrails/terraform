@@ -53,14 +53,20 @@ data "aws_iam_policy_document" "ecs_exec_conference_app" {
       "logs:CreateLogStream",
       "logs:PutLogEvents",
     ]
-    resources = ["${aws_cloudwatch_log_group.conference_app_worker.arn}*"]
+    resources = [
+      "${aws_cloudwatch_log_group.conference_app_worker.arn}*",
+      "${aws_cloudwatch_log_group.conference_app_staging_worker.arn}*",
+    ]
   }
   statement {
     effect = "Allow"
     actions = [
       "ssm:GetParameters",
     ]
-    resources = ["arn:aws:ssm:*:${local.kaigionrails_aws_account_id}:parameter/conference-app/*"]
+    resources = [
+      "arn:aws:ssm:*:${local.kaigionrails_aws_account_id}:parameter/conference-app/*",
+      "arn:aws:ssm:*:${local.kaigionrails_aws_account_id}:parameter/conference-app-staging/*",
+    ]
   }
   statement {
     effect = "Allow"
@@ -130,7 +136,8 @@ data "aws_iam_policy_document" "conference_app" {
     effect  = "Allow"
     actions = ["ssm:GetParameters"]
     resources = [
-      "arn:aws:ssm:*:${local.kaigionrails_aws_account_id}:parameter/conference-app/*"
+      "arn:aws:ssm:*:${local.kaigionrails_aws_account_id}:parameter/conference-app/*",
+      "arn:aws:ssm:*:${local.kaigionrails_aws_account_id}:parameter/conference-app-staging/*",
     ]
   }
   statement {
