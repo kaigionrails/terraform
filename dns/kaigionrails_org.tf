@@ -88,16 +88,35 @@ resource "cloudflare_record" "conference_app_cert_valid_3" {
   ttl     = 3600
   comment = "For domain validation by AWS"
 }
-## end conference app
 
 resource "cloudflare_record" "conference_app_staging" {
   zone_id = cloudflare_zone.kaigionrails_org.id
-  name    = "conf-app-staging"
+  name    = "app-staging"
   type    = "CNAME"
-  value   = "angular-peony-qjzx6tubtntybgs9z7y0ou8j.herokudns.com"
+  value   = "kq9tv5ciqp.us-west-2.awsapprunner.com"
   ttl     = 1
   proxied = true
 }
+
+resource "cloudflare_record" "conference_app_staging_cert_valid_1" {
+  zone_id = cloudflare_zone.kaigionrails_org.id
+  name    = "_5edc0b905ce08c8d45fd748407a65b83.app-staging"
+  type    = "CNAME"
+  value   = "_0f44aeb565e6b1b5f2afc6987653d8b5.djqtsrsxkq.acm-validations.aws."
+  ttl     = 3600
+  comment = "For domain validation by AWS"
+}
+
+resource "cloudflare_record" "conference_app_staging_cert_valid_2" {
+  zone_id = cloudflare_zone.kaigionrails_org.id
+  name    = "_b339cd6e178c9f724740a143ff4b79a2.2a57j77zpvwh5pcx73eck5zy00ncssj.app-staging"
+  type    = "CNAME"
+  value   = "_baa4def4ca38ce1c900b469b2e19ea6d.djqtsrsxkq.acm-validations.aws."
+  ttl     = 3600
+  comment = "For domain validation by AWS"
+}
+
+## end conference app
 
 resource "cloudflare_record" "cfp_app" {
   zone_id = cloudflare_zone.kaigionrails_org.id

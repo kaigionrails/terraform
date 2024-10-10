@@ -255,6 +255,9 @@ data "aws_iam_policy_document" "conference_app_deployer" {
     actions = [
       "apprunner:UpdateService"
     ]
-    resources = [aws_apprunner_service.conference_app.arn]
+    resources = [
+      aws_apprunner_service.conference_app.arn,
+      aws_apprunner_service.conference_app_staging.arn
+    ]
   }
 }
