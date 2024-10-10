@@ -67,8 +67,8 @@ resource "aws_apprunner_service" "sponsor_app" {
 
   health_check_configuration {
     protocol            = "TCP"
-    healthy_threshold   = 3
-    unhealthy_threshold = 3
+    healthy_threshold   = 2
+    unhealthy_threshold = 2
     interval            = 5
   }
 
@@ -147,8 +147,8 @@ resource "aws_apprunner_service" "sponsor_app_staging" {
 
   health_check_configuration {
     protocol            = "TCP"
-    healthy_threshold   = 3
-    unhealthy_threshold = 3
+    healthy_threshold   = 2
+    unhealthy_threshold = 2
     interval            = 5
   }
 
