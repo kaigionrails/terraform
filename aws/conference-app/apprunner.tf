@@ -24,6 +24,8 @@ resource "aws_apprunner_service" "conference_app" {
         # See also kaigionrails/conference-app/deploy/task_definition.jsonnet
         runtime_environment_secrets = {
           CLOUDFLARE_ACCESS_KEY_ID     = aws_ssm_parameter.conference_app_cloudflare_access_key_id.arn
+          CLOUDFLARE_ACCOUNT_ID        = aws_ssm_parameter.conference_app_cloudflare_account_id.arn
+          CLOUDFLARE_API_TOKEN         = aws_ssm_parameter.conference_app_cloudflare_api_token.arn
           CLOUDFLARE_SECRET_ACCESS_KEY = aws_ssm_parameter.conference_app_cloudflare_secret_access_key.arn
           CLOUDFLARE_R2_BUCKET_NAME    = aws_ssm_parameter.conference_app_cloudflare_r2_bucket_name.arn
           CLOUDFLARE_R2_ENDPOINT       = aws_ssm_parameter.conference_app_cloudflare_r2_endpoint.arn
@@ -97,6 +99,8 @@ resource "aws_apprunner_service" "conference_app_staging" {
         # See also kaigionrails/conference-app/deploy/staging/task_definition.jsonnet
         runtime_environment_secrets = {
           CLOUDFLARE_ACCESS_KEY_ID     = aws_ssm_parameter.conference_app_staging_cloudflare_access_key_id.arn
+          CLOUDFLARE_ACCOUNT_ID        = aws_ssm_parameter.conference_app_staging_cloudflare_account_id.arn
+          CLOUDFLARE_API_TOKEN         = aws_ssm_parameter.conference_app_staging_cloudflare_api_token.arn
           CLOUDFLARE_SECRET_ACCESS_KEY = aws_ssm_parameter.conference_app_staging_cloudflare_secret_access_key.arn
           CLOUDFLARE_R2_BUCKET_NAME    = aws_ssm_parameter.conference_app_staging_cloudflare_r2_bucket_name.arn
           CLOUDFLARE_R2_ENDPOINT       = aws_ssm_parameter.conference_app_staging_cloudflare_r2_endpoint.arn
