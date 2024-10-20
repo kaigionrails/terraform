@@ -8,6 +8,26 @@ resource "aws_ssm_parameter" "conference_app_cloudflare_access_key_id" {
   }
 }
 
+resource "aws_ssm_parameter" "conference_app_cloudflare_account_id" {
+  provider = aws.usw2
+  name     = "/conference-app/CLOUDFLARE_ACCOUNT_ID"
+  type     = "SecureString"
+  value    = "CLOUDFLARE_ACCOUNT_ID"
+  lifecycle {
+    ignore_changes = [value]
+  }
+}
+
+resource "aws_ssm_parameter" "conference_app_cloudflare_api_token" {
+  provider = aws.usw2
+  name     = "/conference-app/CLOUDFLARE_API_TOKEN"
+  type     = "SecureString"
+  value    = "CLOUDFLARE_API_TOKEN"
+  lifecycle {
+    ignore_changes = [value]
+  }
+}
+
 resource "aws_ssm_parameter" "conference_app_cloudflare_secret_access_key" {
   provider = aws.usw2
   name     = "/conference-app/CLOUDFLARE_SECRET_ACCESS_KEY"
@@ -165,6 +185,26 @@ resource "aws_ssm_parameter" "conference_app_staging_cloudflare_access_key_id" {
   name     = "/conference-app-staging/CLOUDFLARE_ACCESS_KEY_ID"
   type     = "SecureString"
   value    = "CLOUDFLARE_ACCESS_KEY_ID"
+  lifecycle {
+    ignore_changes = [value]
+  }
+}
+
+resource "aws_ssm_parameter" "conference_app_staging_cloudflare_account_id" {
+  provider = aws.usw2
+  name     = "/conference-app-staging/CLOUDFLARE_ACCOUNT_ID"
+  type     = "SecureString"
+  value    = "CLOUDFLARE_ACCOUNT_ID"
+  lifecycle {
+    ignore_changes = [value]
+  }
+}
+
+resource "aws_ssm_parameter" "conference_app_staging_cloudflare_api_token" {
+  provider = aws.usw2
+  name     = "/conference-app-staging/CLOUDFLARE_API_TOKEN"
+  type     = "SecureString"
+  value    = "CLOUDFLARE_API_TOKEN"
   lifecycle {
     ignore_changes = [value]
   }
