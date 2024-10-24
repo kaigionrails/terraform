@@ -62,7 +62,8 @@ resource "aws_apprunner_service" "conference_app" {
   }
 
   health_check_configuration {
-    protocol            = "TCP"
+    protocol            = "HTTP"
+    path                = "/up"
     healthy_threshold   = 2
     unhealthy_threshold = 2
     interval            = 5
@@ -137,7 +138,8 @@ resource "aws_apprunner_service" "conference_app_staging" {
   }
 
   health_check_configuration {
-    protocol            = "TCP"
+    protocol            = "HTTP"
+    path                = "/up"
     healthy_threshold   = 2
     unhealthy_threshold = 2
     interval            = 5
