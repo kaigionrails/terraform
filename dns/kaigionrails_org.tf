@@ -12,30 +12,6 @@ resource "cloudflare_record" "upload_2022" {
   ttl     = 300
 }
 
-resource "cloudflare_record" "cname_2021" {
-  zone_id = cloudflare_zone.kaigionrails_org.id
-  name    = "2021"
-  type    = "CNAME"
-  value   = "ruby-no-kai.github.io"
-  ttl     = 1
-}
-
-resource "cloudflare_record" "cname_2022" {
-  zone_id = cloudflare_zone.kaigionrails_org.id
-  name    = "2022"
-  type    = "CNAME"
-  value   = "kaigionrails.github.io"
-  ttl     = 1
-}
-
-resource "cloudflare_record" "cname_2023" {
-  zone_id = cloudflare_zone.kaigionrails_org.id
-  name    = "2023"
-  type    = "CNAME"
-  value   = "kaigionrails.github.io"
-  ttl     = 300
-}
-
 resource "cloudflare_record" "cname_2024" {
   zone_id = cloudflare_zone.kaigionrails_org.id
   name    = "2024"
