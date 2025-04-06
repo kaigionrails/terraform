@@ -90,7 +90,6 @@ resource "aws_apprunner_service" "sponsor_app_staging" {
         runtime_environment_variables = {
           AWS_ACCESS_KEY_ID        = "sample"
           AWS_REGION               = "ap-northeast-1"
-          AWS_SECRET_ACCESS_KEY    = "sample"
           DEFAULT_EMAIL_ADDRESS    = "sponsorships-staging@kaigionrails.org"
           DEFAULT_EMAIL_HOST       = "sponsorships-staging.kaigionrails.org"
           DEFAULT_URL_HOST         = "sponsorships-staging.kaigionrails.org"
@@ -101,6 +100,8 @@ resource "aws_apprunner_service" "sponsor_app_staging" {
           RAILS_ENV                = "production"
           RAILS_LOG_TO_STDOUT      = "enabled"
           RAILS_SERVE_STATIC_FILES = "enabled"
+          S3_FILES_REGION          = "ap-northeast-1"
+          S3_FILES_ROLE            = aws_iam_role.sponsor_app_staging_user.arn
           SENTRY_ENV               = "staging"
         }
 
