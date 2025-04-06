@@ -19,6 +19,8 @@ resource "aws_apprunner_service" "sponsor_app" {
           RAILS_ENV                = "production"
           RAILS_LOG_TO_STDOUT      = "enabled"
           RAILS_SERVE_STATIC_FILES = "enabled"
+          S3_FILES_REGION          = "ap-northeast-1"
+          S3_FILES_ROLE            = aws_iam_role.sponsor_app_user.arn
           SENTRY_ENV               = "production"
         }
 

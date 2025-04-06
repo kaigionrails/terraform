@@ -138,6 +138,7 @@ data "aws_iam_policy_document" "sponsor_app" {
       "sts:AssumeRole",
     ]
     resources = [
+      aws_iam_role.sponsor_app_user.arn,
       aws_iam_role.sponsor_app_staging_user.arn,
     ]
   }
@@ -174,6 +175,8 @@ data "aws_iam_policy_document" "sponsor_app" {
       "s3:ListBucket",
     ]
     resources = [
+      aws_s3_bucket.sponsor_app.arn,
+      "${aws_s3_bucket.sponsor_app.arn}/*",
       aws_s3_bucket.sponsor_app_staging.arn,
       "${aws_s3_bucket.sponsor_app_staging.arn}/*",
     ]
@@ -291,6 +294,43 @@ data "aws_iam_policy_document" "sponsor_app_deployer" {
     resources = [
       aws_apprunner_service.sponsor_app.arn,
       aws_apprunner_service.sponsor_app_staging.arn
+    ]
+  }
+}
+
+resource "aws_iam_role" "sponsor_app_user" {
+  name                 = "SponsorAppUser"
+  description          = "SponsorAppUser"
+  assume_role_policy   = data.aws_iam_policy_document.sponsor_app_user_trust.json
+  max_session_duration = 43200
+}
+
+data "aws_iam_policy_document" "sponsor_app_user_trust" {
+  statement {
+    effect  = "Allow"
+    actions = ["sts:AssumeRole"]
+    principals {
+      type = "AWS"
+      identifiers = [
+        "arn:aws:iam::${local.kaigionrails_aws_account_id}:root"
+      ]
+    }
+  }
+}
+
+resource "aws_iam_role_policy" "sponsor_app_user" {
+  role   = aws_iam_role.sponsor_app_user.name
+  policy = data.aws_iam_policy_document.sponsor_app_user.json
+}
+
+data "aws_iam_policy_document" "sponsor_app_user" {
+  statement {
+    effect = "Allow"
+    actions = [
+      "s3:PutObject",
+    ]
+    resources = [
+      "${aws_s3_bucket.sponsor_app.arn}/*",
     ]
   }
 }
