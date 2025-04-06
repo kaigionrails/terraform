@@ -9,9 +9,6 @@ resource "aws_apprunner_service" "sponsor_app" {
 
         # See also kaigionrails/sponsor-app/deploy/task_definition.jsonnet
         runtime_environment_variables = {
-          AWS_ACCESS_KEY_ID        = "sample"
-          AWS_REGION               = "ap-northeast-1"
-          AWS_SECRET_ACCESS_KEY    = "sample"
           DEFAULT_EMAIL_ADDRESS    = "sponsorships@kaigionrails.org"
           DEFAULT_EMAIL_HOST       = "sponsorships.kaigionrails.org"
           DEFAULT_URL_HOST         = "sponsorships.kaigionrails.org"
@@ -88,8 +85,6 @@ resource "aws_apprunner_service" "sponsor_app_staging" {
 
         # See also kaigionrails/sponsor-app/deploy/staging/task_definition.jsonnet
         runtime_environment_variables = {
-          AWS_ACCESS_KEY_ID        = "sample"
-          AWS_REGION               = "ap-northeast-1"
           DEFAULT_EMAIL_ADDRESS    = "sponsorships-staging@kaigionrails.org"
           DEFAULT_EMAIL_HOST       = "sponsorships-staging.kaigionrails.org"
           DEFAULT_URL_HOST         = "sponsorships-staging.kaigionrails.org"
