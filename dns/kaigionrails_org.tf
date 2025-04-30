@@ -20,6 +20,14 @@ resource "cloudflare_record" "cname_2024" {
   ttl     = 300
 }
 
+resource "cloudflare_record" "cname_2025" {
+  zone_id = cloudflare_zone.kaigionrails_org.id
+  name    = "2025"
+  type    = "CNAME"
+  value   = "kaigionrails.github.io"
+  ttl     = 300
+}
+
 resource "cloudflare_record" "google_verify" {
   zone_id = cloudflare_zone.kaigionrails_org.id
   name    = "22161183"
