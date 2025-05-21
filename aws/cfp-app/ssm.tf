@@ -154,6 +154,24 @@ resource "aws_ssm_parameter" "cfp_app_database_url_apne1" {
   }
 }
 
+resource "aws_ssm_parameter" "cfp_app_database_db_apne1" {
+  name  = "/cfp-app/DATABASE_DB"
+  type  = "SecureString"
+  value = "DATABASE_DB"
+  lifecycle {
+    ignore_changes = [value]
+  }
+}
+
+resource "aws_ssm_parameter" "cfp_app_database_host_apne1" {
+  name  = "/cfp-app/DATABASE_HOST"
+  type  = "SecureString"
+  value = "DATABASE_HOST"
+  lifecycle {
+    ignore_changes = [value]
+  }
+}
+
 resource "aws_ssm_parameter" "cfp_app_github_key_apne1" {
   name  = "/cfp-app/GITHUB_KEY"
   type  = "SecureString"
