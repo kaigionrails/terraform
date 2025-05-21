@@ -121,3 +121,20 @@ resource "aws_apprunner_custom_domain_association" "cfp_app" {
   service_arn = aws_apprunner_service.cfp_app.arn
   domain_name = "cfp.kaigionrails.org"
 }
+
+resource "aws_security_group" "cfp_app_apprunner" {
+  name   = "cfp-app-apprunner"
+  vpc_id = data.aws_vpc.kaigionrails_apne1.id
+}
+
+resource "aws_vpc_security_group_egress_rule" "cfp_app_apprunner_egress_to_internet_v4" {
+  security_group_id = aws_security_group.cfp_app_apprunner.id
+  cidr_ipv4         = "0.0.0.0/0"
+  ip_protocol       = -1
+}
+
+resource "aws_vpc_security_group_egress_rule" "cfp_app_apprunner_egress_to_internet_v6" {
+  security_group_id = aws_security_group.cfp_app_apprunner.id
+  cidr_ipv6         = "::/0"
+  ip_protocol       = -1
+}

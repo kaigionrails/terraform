@@ -35,3 +35,11 @@ provider "aws" {
 }
 
 data "aws_caller_identity" "curent" {}
+
+data "aws_db_subnet_group" "kaigionrails_apne1_private" {
+  name = "kaigionrails-apne1-private"
+}
+
+data "aws_vpc" "kaigionrails_apne1" {
+  id = "vpc-046d56710c1fe9fdb"
+}
