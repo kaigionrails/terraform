@@ -45,7 +45,10 @@ data "aws_iam_policy_document" "ecs_exec_cfp_app" {
       "ecr:BatchGetImage",
       "ecr:DescribeImages",
     ]
-    resources = [aws_ecr_repository.cfp_app.arn]
+    resources = [
+      aws_ecr_repository.cfp_app.arn,
+      aws_ecr_repository.cfp_app_apne1.arn,
+    ]
   }
   statement {
     effect = "Allow"
@@ -53,7 +56,10 @@ data "aws_iam_policy_document" "ecs_exec_cfp_app" {
       "logs:CreateLogStream",
       "logs:PutLogEvents",
     ]
-    resources = ["${aws_cloudwatch_log_group.cfp_app_worker.arn}*"]
+    resources = [
+      "${aws_cloudwatch_log_group.cfp_app_worker.arn}*",
+      "${aws_cloudwatch_log_group.cfp_app_worker_apne1.arn}*",
+    ]
   }
   statement {
     effect = "Allow"
@@ -67,7 +73,10 @@ data "aws_iam_policy_document" "ecs_exec_cfp_app" {
     actions = [
       "kms:Decrypt",
     ]
-    resources = [data.aws_kms_key.usw2_ssm.arn]
+    resources = [
+      data.aws_kms_key.usw2_ssm.arn,
+      data.aws_kms_key.apne1_ssm.arn,
+    ]
   }
 }
 
@@ -134,9 +143,12 @@ data "aws_iam_policy_document" "cfp_app" {
     ]
   }
   statement {
-    effect    = "Allow"
-    actions   = ["kms:Decrypt"]
-    resources = [data.aws_kms_key.usw2_ssm.arn]
+    effect  = "Allow"
+    actions = ["kms:Decrypt"]
+    resources = [
+      data.aws_kms_key.usw2_ssm.arn,
+      data.aws_kms_key.apne1_ssm.arn,
+    ]
   }
   statement {
     effect = "Allow"
