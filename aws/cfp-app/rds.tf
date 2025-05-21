@@ -8,6 +8,7 @@ resource "aws_rds_cluster" "cfp_app_apne1" {
   apply_immediately           = true
   network_type                = "DUAL"
   skip_final_snapshot         = true # tmp
+  vpc_security_group_ids      = [aws_security_group.cfp_app_db.id]
 
   serverlessv2_scaling_configuration {
     min_capacity = 0
@@ -37,4 +38,12 @@ resource "aws_vpc_security_group_ingress_rule" "cfp_app_db_inbound_from_apprunne
   to_port                      = 5432
   ip_protocol                  = "tcp"
   referenced_security_group_id = aws_security_group.cfp_app_apprunner.id
+}
+
+resource "aws_vpc_security_group_ingress_rule" "cfp_app_db_inbound_from_worker" {
+  security_group_id            = aws_security_group.cfp_app_db.id
+  from_port                    = 5432
+  to_port                      = 5432
+  ip_protocol                  = "tcp"
+  referenced_security_group_id = aws_security_group.cfp_app_worker.id
 }
