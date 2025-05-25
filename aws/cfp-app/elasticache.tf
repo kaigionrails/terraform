@@ -1,5 +1,5 @@
 resource "aws_security_group" "cfp_app_cache" {
-  name   = "cpf-app-cache"
+  name   = "cfp-app-cache"
   vpc_id = data.aws_vpc.kaigionrails_apne1.id
 }
 

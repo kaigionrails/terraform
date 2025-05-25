@@ -28,7 +28,7 @@ resource "aws_rds_cluster_instance" "cfp_app_apne1" {
 }
 
 resource "aws_security_group" "cfp_app_db" {
-  name   = "cpf-app-db"
+  name   = "cfp-app-db"
   vpc_id = data.aws_vpc.kaigionrails_apne1.id
 }
 
