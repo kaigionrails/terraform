@@ -158,6 +158,26 @@ resource "aws_ssm_parameter" "conference_app_sentry_dsn" {
   }
 }
 
+resource "aws_ssm_parameter" "conference_app_tito_account_slug" {
+  provider = aws.usw2
+  name     = "/conference-app/TITO_ACCOUNT_SLUG"
+  type     = "SecureString"
+  value    = "TITO_ACCOUNT_SLUG"
+  lifecycle {
+    ignore_changes = [value]
+  }
+}
+
+resource "aws_ssm_parameter" "conference_app_tito_api_token" {
+  provider = aws.usw2
+  name     = "/conference-app/TITO_API_TOKEN"
+  type     = "SecureString"
+  value    = "TITO_API_TOKEN"
+  lifecycle {
+    ignore_changes = [value]
+  }
+}
+
 resource "aws_ssm_parameter" "conference_app_vapid_private_key" {
   provider = aws.usw2
   name     = "/conference-app/VAPID_PRIVATE_KEY"
@@ -335,6 +355,26 @@ resource "aws_ssm_parameter" "conference_app_staging_sentry_dsn" {
   name     = "/conference-app-staging/SENTRY_DSN"
   type     = "SecureString"
   value    = "SENTRY_DSN"
+  lifecycle {
+    ignore_changes = [value]
+  }
+}
+
+resource "aws_ssm_parameter" "conference_app_staging_tito_account_slug" {
+  provider = aws.usw2
+  name     = "/conference-app-staging/TITO_ACCOUNT_SLUG"
+  type     = "SecureString"
+  value    = "TITO_ACCOUNT_SLUG"
+  lifecycle {
+    ignore_changes = [value]
+  }
+}
+
+resource "aws_ssm_parameter" "conference_app_staging_tito_api_token" {
+  provider = aws.usw2
+  name     = "/conference-app-staging/TITO_API_TOKEN"
+  type     = "SecureString"
+  value    = "TITO_API_TOKEN"
   lifecycle {
     ignore_changes = [value]
   }
