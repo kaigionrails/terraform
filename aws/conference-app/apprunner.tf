@@ -41,6 +41,7 @@ resource "aws_apprunner_service" "conference_app" {
           SENTRY_DSN                   = aws_ssm_parameter.conference_app_sentry_dsn.arn
           TITO_ACCOUNT_SLUG            = aws_ssm_parameter.conference_app_tito_account_slug.arn
           TITO_API_TOKEN               = aws_ssm_parameter.conference_app_tito_api_token.arn
+          TITO_WEBHOOK_SECRET          = aws_ssm_parameter.conference_app_tito_webhook_secret.arn
           VAPID_PRIVATE_KEY            = aws_ssm_parameter.conference_app_vapid_private_key.arn
           VAPID_PUBLIC_KEY             = aws_ssm_parameter.conference_app_vapid_public_key.arn
         }
@@ -119,6 +120,7 @@ resource "aws_apprunner_service" "conference_app_staging" {
           SENTRY_DSN                   = aws_ssm_parameter.conference_app_staging_sentry_dsn.arn
           TITO_ACCOUNT_SLUG            = aws_ssm_parameter.conference_app_staging_tito_account_slug.arn
           TITO_API_TOKEN               = aws_ssm_parameter.conference_app_staging_tito_api_token.arn
+          TITO_WEBHOOK_SECRET          = aws_ssm_parameter.conference_app_staging_tito_webhook_secret.arn
           VAPID_PRIVATE_KEY            = aws_ssm_parameter.conference_app_staging_vapid_private_key.arn
           VAPID_PUBLIC_KEY             = aws_ssm_parameter.conference_app_staging_vapid_public_key.arn
         }
