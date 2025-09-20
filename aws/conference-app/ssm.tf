@@ -178,6 +178,16 @@ resource "aws_ssm_parameter" "conference_app_tito_api_token" {
   }
 }
 
+resource "aws_ssm_parameter" "conference_app_tito_webhook_secret" {
+  provider = aws.usw2
+  name     = "/conference-app/TITO_WEBHOOK_SECRET"
+  type     = "SecureString"
+  value    = "TITO_WEBHOOK_SECRET"
+  lifecycle {
+    ignore_changes = [value]
+  }
+}
+
 resource "aws_ssm_parameter" "conference_app_vapid_private_key" {
   provider = aws.usw2
   name     = "/conference-app/VAPID_PRIVATE_KEY"
@@ -375,6 +385,16 @@ resource "aws_ssm_parameter" "conference_app_staging_tito_api_token" {
   name     = "/conference-app-staging/TITO_API_TOKEN"
   type     = "SecureString"
   value    = "TITO_API_TOKEN"
+  lifecycle {
+    ignore_changes = [value]
+  }
+}
+
+resource "aws_ssm_parameter" "conference_app_staging_tito_webhook_secret" {
+  provider = aws.usw2
+  name     = "/conference-app-staging/TITO_WEBHOOK_SECRET"
+  type     = "SecureString"
+  value    = "TITO_WEBHOOK_SECRET"
   lifecycle {
     ignore_changes = [value]
   }
