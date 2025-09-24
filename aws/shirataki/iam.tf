@@ -45,7 +45,7 @@ data "aws_iam_policy_document" "shirataki_ec2" {
       "transcribe:StartStreamTranscriptionWebsocket",
       "transcribe:ListLanguageModels",
     ]
-    resources = ["arn:aws:transcribe:*:${data.aws_caller_identity.curent.account_id}:*"]
+    resources = ["*"]
   }
 }
 
