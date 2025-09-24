@@ -44,6 +44,20 @@ data "aws_vpc" "kaigionrails_apne1" {
   id = "vpc-046d56710c1fe9fdb"
 }
 
+data "aws_subnet" "kaigionrails_apne1_c_public" {
+  filter {
+    name   = "tag:Name"
+    values = ["kor-apne1-c-public"]
+  }
+}
+
+data "aws_subnet" "kaigionrails_apne1_d_public" {
+  filter {
+    name   = "tag:Name"
+    values = ["kor-apne1-d-public"]
+  }
+}
+
 data "aws_subnet" "kaigionrails_apne1_c_private" {
   filter {
     name   = "tag:Name"
@@ -56,4 +70,8 @@ data "aws_subnet" "kaigionrails_apne1_d_private" {
     name   = "tag:Name"
     values = ["kor-apne1-d-private"]
   }
+}
+
+data "aws_s3_bucket" "kaigionrails_logs" {
+  bucket = "kaigionrails-logs"
 }
