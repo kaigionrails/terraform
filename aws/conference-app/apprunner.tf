@@ -97,6 +97,7 @@ resource "aws_apprunner_service" "conference_app_staging" {
           RAILS_SERVE_STATIC_FILES  = "enabled"
           SCOUT_NAME                = "conference-app-staging"
           SENTRY_ENV                = "staging"
+          SHIRATAKI_URL             = "https://shirataki-staging.kaigionrails.org"
           VAPID_SUBJECT_MAILTO      = "mailto:info@kaigionrails.org"
         }
 
