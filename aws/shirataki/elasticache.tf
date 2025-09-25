@@ -26,3 +26,14 @@ resource "aws_elasticache_serverless_cache" "shirataki_staging" {
     data.aws_subnet.kaigionrails_apne1_d_private.id,
   ]
 }
+
+resource "aws_elasticache_serverless_cache" "shirataki_production" {
+  engine               = "valkey"
+  name                 = "shirataki-production"
+  major_engine_version = 7
+  security_group_ids   = [aws_security_group.shirataki_cache.id]
+  subnet_ids = [
+    data.aws_subnet.kaigionrails_apne1_c_private.id,
+    data.aws_subnet.kaigionrails_apne1_d_private.id,
+  ]
+}
