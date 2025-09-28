@@ -84,80 +84,80 @@ resource "aws_vpc_security_group_egress_rule" "shirataki_lb_staging_outbound_to_
   ip_protocol                  = "tcp"
 }
 
-resource "aws_lb" "shirataki_staging" {
-  name               = "shirataki-staging"
-  internal           = false
-  load_balancer_type = "application"
-  ip_address_type    = "dualstack"
-  security_groups = [
-    aws_security_group.shirataki_lb_staging.id
-  ]
-  subnets = [
-    data.aws_subnet.kaigionrails_apne1_c_public.id,
-    data.aws_subnet.kaigionrails_apne1_d_public.id,
-  ]
+# resource "aws_lb" "shirataki_staging" {
+#   name               = "shirataki-staging"
+#   internal           = false
+#   load_balancer_type = "application"
+#   ip_address_type    = "dualstack"
+#   security_groups = [
+#     aws_security_group.shirataki_lb_staging.id
+#   ]
+#   subnets = [
+#     data.aws_subnet.kaigionrails_apne1_c_public.id,
+#     data.aws_subnet.kaigionrails_apne1_d_public.id,
+#   ]
 
-  enable_deletion_protection = true
+#   enable_deletion_protection = true
 
-  access_logs {
-    bucket  = data.aws_s3_bucket.kaigionrails_logs.id
-    prefix  = "shirataki/staging"
-    enabled = true
-  }
-}
+#   access_logs {
+#     bucket  = data.aws_s3_bucket.kaigionrails_logs.id
+#     prefix  = "shirataki/staging"
+#     enabled = true
+#   }
+# }
 
-resource "aws_lb_target_group" "shirataki_staging" {
-  name        = "shirataki-staging"
-  port        = 4000
-  protocol    = "HTTP"
-  vpc_id      = data.aws_vpc.kaigionrails_apne1.id
-  target_type = "instance"
+# resource "aws_lb_target_group" "shirataki_staging" {
+#   name        = "shirataki-staging"
+#   port        = 4000
+#   protocol    = "HTTP"
+#   vpc_id      = data.aws_vpc.kaigionrails_apne1.id
+#   target_type = "instance"
 
-  health_check {
-    enabled             = true
-    interval            = 15
-    path                = "/health"
-    port                = 4000
-    protocol            = "HTTP"
-    healthy_threshold   = 2
-    unhealthy_threshold = 2
-    timeout             = 5
-  }
-}
+#   health_check {
+#     enabled             = true
+#     interval            = 15
+#     path                = "/health"
+#     port                = 4000
+#     protocol            = "HTTP"
+#     healthy_threshold   = 2
+#     unhealthy_threshold = 2
+#     timeout             = 5
+#   }
+# }
 
-resource "aws_acm_certificate" "shirataki_staging" {
-  domain_name       = "shirataki-staging.kaigionrails.org"
-  validation_method = "DNS"
+# resource "aws_acm_certificate" "shirataki_staging" {
+#   domain_name       = "shirataki-staging.kaigionrails.org"
+#   validation_method = "DNS"
 
-  lifecycle {
-    create_before_destroy = true
-  }
-}
+#   lifecycle {
+#     create_before_destroy = true
+#   }
+# }
 
-resource "aws_lb_listener" "shirataki_staging_http" {
-  load_balancer_arn = aws_lb.shirataki_staging.arn
-  port              = 80
-  protocol          = "HTTP"
+# resource "aws_lb_listener" "shirataki_staging_http" {
+#   load_balancer_arn = aws_lb.shirataki_staging.arn
+#   port              = 80
+#   protocol          = "HTTP"
 
-  default_action {
-    type             = "forward"
-    target_group_arn = aws_lb_target_group.shirataki_staging.arn
-  }
-}
+#   default_action {
+#     type             = "forward"
+#     target_group_arn = aws_lb_target_group.shirataki_staging.arn
+#   }
+# }
 
 
-resource "aws_lb_listener" "shirataki_staging_https" {
-  load_balancer_arn = aws_lb.shirataki_staging.arn
-  port              = 443
-  protocol          = "HTTPS"
-  ssl_policy        = "ELBSecurityPolicy-TLS13-1-2-2021-06"
-  certificate_arn   = aws_acm_certificate.shirataki_staging.arn
+# resource "aws_lb_listener" "shirataki_staging_https" {
+#   load_balancer_arn = aws_lb.shirataki_staging.arn
+#   port              = 443
+#   protocol          = "HTTPS"
+#   ssl_policy        = "ELBSecurityPolicy-TLS13-1-2-2021-06"
+#   certificate_arn   = aws_acm_certificate.shirataki_staging.arn
 
-  default_action {
-    type             = "forward"
-    target_group_arn = aws_lb_target_group.shirataki_staging.arn
-  }
-}
+#   default_action {
+#     type             = "forward"
+#     target_group_arn = aws_lb_target_group.shirataki_staging.arn
+#   }
+# }
 
 resource "aws_security_group" "shirataki_lb_production" {
   name   = "shirataki-lb-production"
@@ -204,77 +204,77 @@ resource "aws_vpc_security_group_egress_rule" "shirataki_lb_production_outbound_
   ip_protocol                  = "tcp"
 }
 
-resource "aws_lb" "shirataki_production" {
-  name               = "shirataki-production"
-  internal           = false
-  load_balancer_type = "application"
-  ip_address_type    = "dualstack"
-  security_groups = [
-    aws_security_group.shirataki_lb_staging.id
-  ]
-  subnets = [
-    data.aws_subnet.kaigionrails_apne1_c_public.id,
-    data.aws_subnet.kaigionrails_apne1_d_public.id,
-  ]
+# resource "aws_lb" "shirataki_production" {
+#   name               = "shirataki-production"
+#   internal           = false
+#   load_balancer_type = "application"
+#   ip_address_type    = "dualstack"
+#   security_groups = [
+#     aws_security_group.shirataki_lb_staging.id
+#   ]
+#   subnets = [
+#     data.aws_subnet.kaigionrails_apne1_c_public.id,
+#     data.aws_subnet.kaigionrails_apne1_d_public.id,
+#   ]
 
-  enable_deletion_protection = true
+#   enable_deletion_protection = true
 
-  access_logs {
-    bucket  = data.aws_s3_bucket.kaigionrails_logs.id
-    prefix  = "shirataki/production"
-    enabled = true
-  }
-}
+#   access_logs {
+#     bucket  = data.aws_s3_bucket.kaigionrails_logs.id
+#     prefix  = "shirataki/production"
+#     enabled = true
+#   }
+# }
 
-resource "aws_lb_target_group" "shirataki_production" {
-  name        = "shirataki-production"
-  port        = 4000
-  protocol    = "HTTP"
-  vpc_id      = data.aws_vpc.kaigionrails_apne1.id
-  target_type = "instance"
+# resource "aws_lb_target_group" "shirataki_production" {
+#   name        = "shirataki-production"
+#   port        = 4000
+#   protocol    = "HTTP"
+#   vpc_id      = data.aws_vpc.kaigionrails_apne1.id
+#   target_type = "instance"
 
-  health_check {
-    enabled             = true
-    interval            = 15
-    path                = "/health"
-    port                = 4000
-    protocol            = "HTTP"
-    healthy_threshold   = 2
-    unhealthy_threshold = 2
-    timeout             = 5
-  }
-}
+#   health_check {
+#     enabled             = true
+#     interval            = 15
+#     path                = "/health"
+#     port                = 4000
+#     protocol            = "HTTP"
+#     healthy_threshold   = 2
+#     unhealthy_threshold = 2
+#     timeout             = 5
+#   }
+# }
 
-resource "aws_acm_certificate" "shirataki_production" {
-  domain_name       = "shirataki.kaigionrails.org"
-  validation_method = "DNS"
+# resource "aws_acm_certificate" "shirataki_production" {
+#   domain_name       = "shirataki.kaigionrails.org"
+#   validation_method = "DNS"
 
-  lifecycle {
-    create_before_destroy = true
-  }
-}
+#   lifecycle {
+#     create_before_destroy = true
+#   }
+# }
 
-resource "aws_lb_listener" "shirataki_production_http" {
-  load_balancer_arn = aws_lb.shirataki_production.arn
-  port              = 80
-  protocol          = "HTTP"
+# resource "aws_lb_listener" "shirataki_production_http" {
+#   load_balancer_arn = aws_lb.shirataki_production.arn
+#   port              = 80
+#   protocol          = "HTTP"
 
-  default_action {
-    type             = "forward"
-    target_group_arn = aws_lb_target_group.shirataki_production.arn
-  }
-}
+#   default_action {
+#     type             = "forward"
+#     target_group_arn = aws_lb_target_group.shirataki_production.arn
+#   }
+# }
 
 
-resource "aws_lb_listener" "shirataki_production_https" {
-  load_balancer_arn = aws_lb.shirataki_production.arn
-  port              = 443
-  protocol          = "HTTPS"
-  ssl_policy        = "ELBSecurityPolicy-TLS13-1-2-2021-06"
-  certificate_arn   = aws_acm_certificate.shirataki_production.arn
+# resource "aws_lb_listener" "shirataki_production_https" {
+#   load_balancer_arn = aws_lb.shirataki_production.arn
+#   port              = 443
+#   protocol          = "HTTPS"
+#   ssl_policy        = "ELBSecurityPolicy-TLS13-1-2-2021-06"
+#   certificate_arn   = aws_acm_certificate.shirataki_production.arn
 
-  default_action {
-    type             = "forward"
-    target_group_arn = aws_lb_target_group.shirataki_production.arn
-  }
-}
+#   default_action {
+#     type             = "forward"
+#     target_group_arn = aws_lb_target_group.shirataki_production.arn
+#   }
+# }

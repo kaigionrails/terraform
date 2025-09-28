@@ -16,24 +16,24 @@ data "aws_elasticache_subnet_group" "kaigionrails_apne1_private" {
   name = "kaigionrails-apne1-private"
 }
 
-resource "aws_elasticache_serverless_cache" "shirataki_staging" {
-  engine               = "valkey"
-  name                 = "shirataki-staging"
-  major_engine_version = 7
-  security_group_ids   = [aws_security_group.shirataki_cache.id]
-  subnet_ids = [
-    data.aws_subnet.kaigionrails_apne1_c_private.id,
-    data.aws_subnet.kaigionrails_apne1_d_private.id,
-  ]
-}
-
-resource "aws_elasticache_serverless_cache" "shirataki_production" {
-  engine               = "valkey"
-  name                 = "shirataki-production"
-  major_engine_version = 7
-  security_group_ids   = [aws_security_group.shirataki_cache.id]
-  subnet_ids = [
-    data.aws_subnet.kaigionrails_apne1_c_private.id,
-    data.aws_subnet.kaigionrails_apne1_d_private.id,
-  ]
-}
+# resource "aws_elasticache_serverless_cache" "shirataki_staging" {
+#   engine               = "valkey"
+#   name                 = "shirataki-staging"
+#   major_engine_version = 7
+#   security_group_ids   = [aws_security_group.shirataki_cache.id]
+#   subnet_ids = [
+#     data.aws_subnet.kaigionrails_apne1_c_private.id,
+#     data.aws_subnet.kaigionrails_apne1_d_private.id,
+#   ]
+# }
+# 
+# resource "aws_elasticache_serverless_cache" "shirataki_production" {
+#   engine               = "valkey"
+#   name                 = "shirataki-production"
+#   major_engine_version = 7
+#   security_group_ids   = [aws_security_group.shirataki_cache.id]
+#   subnet_ids = [
+#     data.aws_subnet.kaigionrails_apne1_c_private.id,
+#     data.aws_subnet.kaigionrails_apne1_d_private.id,
+#   ]
+# }
