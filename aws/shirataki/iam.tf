@@ -22,6 +22,15 @@ data "aws_iam_policy_document" "shirataki_ec2" {
   statement {
     effect = "Allow"
     actions = [
+      "s3:PutObject",
+    ]
+    resources = [
+      "${data.aws_s3_bucket.kaigionrails_logs.arn}/*",
+    ]
+  }
+  statement {
+    effect = "Allow"
+    actions = [
       "logs:CreateLogGroup",
       "logs:CreateLogStream",
       "logs:PutLogEvents",
