@@ -22,4 +22,4 @@ provider "aws" {
   }
 }
 
-data "aws_caller_identity" "curent" {}
+data "aws_caller_identity" "current" {}
