@@ -1,0 +1,14 @@
+{
+  "name": "esa-link-unfurler",
+  "version": "1.0.0",
+  "description": "Unfurler for esa.io links in Slack",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.911.0",
+    "@slack/bolt": "^4.0.0",
+    "dayjs": "^1.11.18"
+  }
+}
