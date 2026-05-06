@@ -310,6 +310,31 @@ data "aws_iam_policy_document" "sponsor_app_deployer" {
       aws_apprunner_service.sponsor_app_staging.arn
     ]
   }
+  statement {
+    effect = "Allow"
+    actions = [
+      "lambda:UpdateFunctionCode",
+      "lambda:GetFunctionConfiguration",
+    ]
+    resources = [
+      aws_lambda_function.sponsor_app_web.arn,
+      aws_lambda_function.sponsor_app_lambdakiq.arn,
+      aws_lambda_function.sponsor_app_runner.arn,
+      aws_lambda_function.sponsor_app_web_staging.arn,
+      aws_lambda_function.sponsor_app_lambdakiq_staging.arn,
+      aws_lambda_function.sponsor_app_runner_staging.arn,
+    ]
+  }
+  statement {
+    effect = "Allow"
+    actions = [
+      "lambda:InvokeFunction",
+    ]
+    resources = [
+      aws_lambda_function.sponsor_app_runner.arn,
+      aws_lambda_function.sponsor_app_runner_staging.arn,
+    ]
+  }
 }
 
 resource "aws_iam_role" "sponsor_app_user" {
