@@ -84,7 +84,7 @@ resource "aws_lambda_function" "sponsor_app_runner" {
 
   environment {
     variables = merge(local.default_environments_for_production, {
-      APP_HANDLER     = "config/lambda_rack.LambdaRackApp.handle"
+      APP_HANDLER     = "config/lambda_runner.CommandRunner.handle"
       LAMBDAKIQ_QUEUE = aws_sqs_queue.sponsor_app_lambdakiq.name
     })
   }
@@ -188,7 +188,7 @@ resource "aws_lambda_function" "sponsor_app_runner_staging" {
 
   environment {
     variables = merge(local.default_environments_for_staging, {
-      APP_HANDLER     = "config/lambda_rack.LambdaRackApp.handle"
+      APP_HANDLER     = "config/lambda_runner.CommandRunner.handle"
       LAMBDAKIQ_QUEUE = aws_sqs_queue.sponsor_app_lambdakiq_staging.name
     })
   }
