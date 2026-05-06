@@ -111,25 +111,29 @@ resource "aws_iam_role_policy" "sponsor_app" {
 }
 
 data "aws_iam_policy_document" "sponsor_app" {
-  # TODO: SQS
-  # statement {
-  #   effect    = "Allow"
-  #   actions   = [
-  #     "sqs:SendMessage",
-  #     "sqs:ReceiveMessage",
-  #     "sqs:DeleteMessage",
-  #     "sqs:ChangeMessageVisibility",
-  #     "sqs:GetQueueAttributes",
-  #     "sqs:GetQueueUrl",
-  #     ]
-  #   resources = []
-  # }
+  statement {
+    effect = "Allow"
+    actions = [
+      "sqs:SendMessage",
+      "sqs:ReceiveMessage",
+      "sqs:DeleteMessage",
+      "sqs:ChangeMessageVisibility",
+      "sqs:GetQueueAttributes",
+      "sqs:GetQueueUrl",
+    ]
+    resources = [
+      aws_sqs_queue.sponsor_app_lambdakiq.arn,
+      aws_sqs_queue.sponsor_app_lambdakiq_staging.arn,
+    ]
+  }
+
   # statement {
   #   effect  = "Allow"
   #   actions = ["iam:GetRole"]
   #   # resources = ["arn:aws:iam::${local.kaigionrails_aws_account_id}:role/*"]
   #   resources = ["*"]
   # }
+
   statement {
     effect = "Allow"
     actions = [
