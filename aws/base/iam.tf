@@ -46,7 +46,6 @@ data "aws_iam_policy_document" "GhaDockerPushToEcrPolicy" {
     resources = [
       "arn:aws:ecr:us-west-2:${data.aws_caller_identity.curent.account_id}:repository/cfp-app",
       "arn:aws:ecr:us-west-2:${data.aws_caller_identity.curent.account_id}:repository/sponsor-app",
-      "arn:aws:ecr:ap-northeast-1:${data.aws_caller_identity.curent.account_id}:repository/sponsor-app",
       "arn:aws:ecr:us-west-2:${data.aws_caller_identity.curent.account_id}:repository/conference-app",
     ]
   }
