@@ -28,6 +28,12 @@ resource "aws_lambda_function" "sponsor_app_web" {
   }
 }
 
+resource "aws_lambda_function_url" "sponsor_app_web" {
+  region             = "us-west-2"
+  function_name      = aws_lambda_function.sponsor_app_web.function_name
+  authorization_type = "NONE"
+}
+
 resource "aws_lambda_function" "sponsor_app_lambdakiq" {
   function_name = "sponsor-app-lambdakiq-production"
   region        = "us-west-2"

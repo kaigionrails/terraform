@@ -158,7 +158,7 @@ resource "cloudflare_dns_record" "sponsor_app" {
   zone_id = cloudflare_zone.kaigionrails_org.id
   name    = "sponsorships"
   type    = "CNAME"
-  content = "brvxfmznij.us-west-2.awsapprunner.com"
+  content = "d1us3lf1p5rzxt.cloudfront.net"
   ttl     = 1
 }
 

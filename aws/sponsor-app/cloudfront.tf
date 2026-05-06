@@ -14,6 +14,117 @@ data "aws_s3_bucket" "kaigionrails_logs" {
   bucket = "kaigionrails-logs"
 }
 
+resource "aws_cloudfront_distribution" "sponsor_app" {
+  comment = "sponsor-app production"
+
+  enabled         = true
+  is_ipv6_enabled = true
+  http_version    = "http2and3"
+  price_class     = "PriceClass_All"
+
+  aliases = ["sponsorships.kaigionrails.org"]
+
+  viewer_certificate {
+    acm_certificate_arn            = aws_acm_certificate.sponsor_app.arn
+    cloudfront_default_certificate = false
+    minimum_protocol_version       = "TLSv1.2_2021"
+    ssl_support_method             = "sni-only"
+  }
+
+  # logging_config {
+  #   bucket          = data.aws_s3_bucket.kaigionrails_logs.bucket
+  #   include_cookies = false
+  #   prefix          = "cloudfront/sponsor-app/"
+  # }
+
+  origin {
+    origin_id           = "functionurl"
+    domain_name         = replace(replace(aws_lambda_function_url.sponsor_app_web.function_url, "https://", ""), "/", "")
+    origin_path         = null
+    connection_attempts = 3
+    connection_timeout  = 10
+
+    custom_header {
+      name  = "x-forwarded-host"
+      value = "sponsorships.kaigionrails.org"
+    }
+
+    custom_header {
+      name  = "x-origin-verify"
+      value = random_bytes.sponsor_app_cloudfront_verify.base64
+    }
+
+    custom_origin_config {
+      http_port                = 80
+      https_port               = 443
+      origin_read_timeout      = 30
+      origin_keepalive_timeout = 5
+      origin_protocol_policy   = "https-only"
+      origin_ssl_protocols     = ["TLSv1.2"]
+    }
+  }
+
+  ordered_cache_behavior {
+    target_origin_id       = "functionurl"
+    path_pattern           = "/vite/*"
+    allowed_methods        = ["GET", "HEAD"]
+    cached_methods         = ["GET", "HEAD"]
+    compress               = true
+    cache_policy_id        = data.aws_cloudfront_cache_policy.Managed-CachingOptimized.id
+    viewer_protocol_policy = "redirect-to-https"
+  }
+
+  ordered_cache_behavior {
+    target_origin_id       = "functionurl"
+    path_pattern           = "/"
+    allowed_methods        = ["GET", "HEAD"]
+    cached_methods         = ["GET", "HEAD"]
+    compress               = true
+    viewer_protocol_policy = "redirect-to-https"
+    min_ttl                = 0
+    default_ttl            = 0
+    max_ttl                = 3600
+    forwarded_values {
+      headers                 = ["CloudFront-Viewer-Country"]
+      query_string            = true
+      query_string_cache_keys = []
+      cookies {
+        forward           = "whitelist"
+        whitelisted_names = ["__Host-rk-sponsorapp2-sess", "__Host-rk-sponsorapp2-hl"]
+      }
+    }
+  }
+
+
+  default_cache_behavior {
+    target_origin_id = "functionurl"
+    allowed_methods  = ["DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT"]
+    cached_methods   = ["GET", "HEAD"]
+    compress         = true
+
+    min_ttl     = 0
+    default_ttl = 0
+    max_ttl     = 31536000
+
+    viewer_protocol_policy = "redirect-to-https"
+
+    forwarded_values {
+      headers                 = ["x-csrf-token", "User-Agent", "Origin", "CloudFront-Viewer-Country"]
+      query_string            = true
+      query_string_cache_keys = []
+      cookies {
+        forward           = "whitelist"
+        whitelisted_names = ["__Host-rk-sponsorapp2-sess", "__Host-rk-sponsorapp2-hl"]
+      }
+    }
+  }
+  restrictions {
+    geo_restriction {
+      restriction_type = "none"
+    }
+  }
+}
+
 resource "aws_cloudfront_distribution" "sponsor_app_staging" {
   comment = "sponsor-app staging"
 
