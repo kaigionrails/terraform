@@ -189,6 +189,15 @@ resource "cloudflare_dns_record" "sponsor_app_cert_valid_3" {
   comment = "For domain validation by AWS"
 }
 
+resource "cloudflare_dns_record" "sponsor_app_cert_valid_4" {
+  zone_id = cloudflare_zone.kaigionrails_org.id
+  name    = "_091cdf97fd504e20aae4f98ddd71a4b0.sponsorships"
+  type    = "CNAME"
+  content = "_ce2215e140ac6f5819a27e8c79ae53c5.jkddzztszm.acm-validations.aws"
+  ttl     = 3600
+  comment = "For domain validation by AWS (us-east-1)"
+}
+
 resource "cloudflare_dns_record" "sponsor_app_staging" {
   zone_id = cloudflare_zone.kaigionrails_org.id
   name    = "sponsorships-staging"
