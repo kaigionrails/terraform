@@ -1,9 +1,10 @@
 resource "aws_lambda_function" "sponsor_app_web" {
   function_name = "sponsor-app-web-production"
+  region        = "us-west-2"
 
   package_type  = "Image"
   architectures = ["x86_64"]
-  image_uri     = "${aws_ecr_repository.sponsor_app_apne1.repository_url}:latest"
+  image_uri     = "${aws_ecr_repository.sponsor_app.repository_url}:latest"
   image_config {
     entry_point = ["/lambda_entrypoint.sh"]
   }
@@ -29,10 +30,11 @@ resource "aws_lambda_function" "sponsor_app_web" {
 
 resource "aws_lambda_function" "sponsor_app_lambdakiq" {
   function_name = "sponsor-app-lambdakiq-production"
+  region        = "us-west-2"
 
   package_type  = "Image"
   architectures = ["x86_64"]
-  image_uri     = "${aws_ecr_repository.sponsor_app_apne1.repository_url}:latest"
+  image_uri     = "${aws_ecr_repository.sponsor_app.repository_url}:latest"
   image_config {
     entry_point = ["/lambda_entrypoint.sh"]
   }
@@ -57,6 +59,7 @@ resource "aws_lambda_function" "sponsor_app_lambdakiq" {
 }
 
 resource "aws_lambda_event_source_mapping" "lambdakiq" {
+  region                  = "us-west-2"
   event_source_arn        = aws_sqs_queue.sponsor_app_lambdakiq.arn
   function_name           = aws_lambda_function.sponsor_app_lambdakiq.arn
   batch_size              = 1
@@ -65,10 +68,11 @@ resource "aws_lambda_event_source_mapping" "lambdakiq" {
 
 resource "aws_lambda_function" "sponsor_app_runner" {
   function_name = "sponsor-app-runner-production"
+  region        = "us-west-2"
 
   package_type  = "Image"
   architectures = ["x86_64"]
-  image_uri     = "${aws_ecr_repository.sponsor_app_apne1.repository_url}:latest"
+  image_uri     = "${aws_ecr_repository.sponsor_app.repository_url}:latest"
   image_config {
     entry_point = ["/lambda_entrypoint.sh"]
   }
@@ -94,10 +98,11 @@ resource "aws_lambda_function" "sponsor_app_runner" {
 
 resource "aws_lambda_function" "sponsor_app_web_staging" {
   function_name = "sponsor-app-web-staging"
+  region        = "us-west-2"
 
   package_type  = "Image"
   architectures = ["x86_64"]
-  image_uri     = "${aws_ecr_repository.sponsor_app_apne1.repository_url}:latest"
+  image_uri     = "${aws_ecr_repository.sponsor_app.repository_url}:latest"
   image_config {
     entry_point = ["/lambda_entrypoint.sh"]
   }
@@ -123,10 +128,11 @@ resource "aws_lambda_function" "sponsor_app_web_staging" {
 
 resource "aws_lambda_function" "sponsor_app_lambdakiq_staging" {
   function_name = "sponsor-app-lambdakiq-staging"
+  region        = "us-west-2"
 
   package_type  = "Image"
   architectures = ["x86_64"]
-  image_uri     = "${aws_ecr_repository.sponsor_app_apne1.repository_url}:latest"
+  image_uri     = "${aws_ecr_repository.sponsor_app.repository_url}:latest"
   image_config {
     entry_point = ["/lambda_entrypoint.sh"]
   }
@@ -151,6 +157,7 @@ resource "aws_lambda_function" "sponsor_app_lambdakiq_staging" {
 }
 
 resource "aws_lambda_event_source_mapping" "lambdakiq_staging" {
+  region                  = "us-west-2"
   event_source_arn        = aws_sqs_queue.sponsor_app_lambdakiq_staging.arn
   function_name           = aws_lambda_function.sponsor_app_lambdakiq_staging.arn
   batch_size              = 1
@@ -159,10 +166,11 @@ resource "aws_lambda_event_source_mapping" "lambdakiq_staging" {
 
 resource "aws_lambda_function" "sponsor_app_runner_staging" {
   function_name = "sponsor-app-runner-staging"
+  region        = "us-west-2"
 
   package_type  = "Image"
   architectures = ["x86_64"]
-  image_uri     = "${aws_ecr_repository.sponsor_app_apne1.repository_url}:latest"
+  image_uri     = "${aws_ecr_repository.sponsor_app.repository_url}:latest"
   image_config {
     entry_point = ["/lambda_entrypoint.sh"]
   }

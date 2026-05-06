@@ -29,6 +29,7 @@ resource "aws_ecr_lifecycle_policy" "sponsor_app" {
   })
 }
 
+# TODO: remove
 resource "aws_ecr_repository" "sponsor_app_apne1" {
   name = "sponsor-app"
 
@@ -37,6 +38,7 @@ resource "aws_ecr_repository" "sponsor_app_apne1" {
   }
 }
 
+# TODO: remove
 resource "aws_ecr_lifecycle_policy" "sponsor_app_apne1" {
   repository = aws_ecr_repository.sponsor_app_apne1.name
 
