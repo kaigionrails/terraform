@@ -193,7 +193,7 @@ resource "cloudflare_dns_record" "sponsor_app_staging" {
   zone_id = cloudflare_zone.kaigionrails_org.id
   name    = "sponsorships-staging"
   type    = "CNAME"
-  content = "mqimrwkkmv.us-west-2.awsapprunner.com"
+  content = "d216232qul9iww.cloudfront.net"
   ttl     = 1
 }
 

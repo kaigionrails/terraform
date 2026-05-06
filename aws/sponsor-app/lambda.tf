@@ -126,6 +126,12 @@ resource "aws_lambda_function" "sponsor_app_web_staging" {
   }
 }
 
+resource "aws_lambda_function_url" "sponsor_app_web_staging" {
+  region             = "us-west-2"
+  function_name      = aws_lambda_function.sponsor_app_web_staging.function_name
+  authorization_type = "NONE"
+}
+
 resource "aws_lambda_function" "sponsor_app_lambdakiq_staging" {
   function_name = "sponsor-app-lambdakiq-staging"
   region        = "us-west-2"
