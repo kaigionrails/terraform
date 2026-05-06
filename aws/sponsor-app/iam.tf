@@ -48,7 +48,10 @@ data "aws_iam_policy_document" "ecs_exec_sponsor_app" {
       "ecr:BatchGetImage",
       "ecr:DescribeImages",
     ]
-    resources = [aws_ecr_repository.sponsor_app.arn]
+    resources = [
+      aws_ecr_repository.sponsor_app.arn,
+      aws_ecr_repository.sponsor_app_apne1.arn,
+    ]
   }
   statement {
     effect = "Allow"
