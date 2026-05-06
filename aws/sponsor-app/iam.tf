@@ -10,8 +10,11 @@ data "aws_iam_policy_document" "ecs_exec_sponsor_app_trust" {
     effect  = "Allow"
     actions = ["sts:AssumeRole"]
     principals {
-      type        = "Service"
-      identifiers = ["ecs-tasks.amazonaws.com"]
+      type = "Service"
+      identifiers = [
+        "ecs-tasks.amazonaws.com",
+        "lambda.amazonaws.com",
+      ]
     }
     principals {
       type = "AWS"
@@ -92,16 +95,8 @@ data "aws_iam_policy_document" "sponsor_app_trust" {
       type = "Service"
       identifiers = [
         "ecs-tasks.amazonaws.com",
-      ]
-    }
-  }
-  statement {
-    effect  = "Allow"
-    actions = ["sts:AssumeRole"]
-    principals {
-      type = "Service"
-      identifiers = [
-        "tasks.apprunner.amazonaws.com"
+        "tasks.apprunner.amazonaws.com",
+        "lambda.amazonaws.com",
       ]
     }
   }
