@@ -21,11 +21,11 @@ resource "aws_sqs_queue" "sponsor_app_lambdakiq_dlq" {
   }
 }
 
-resource "aws_sqs_queue" "sponsor_app_staging_lambdakiq" {
-  name = "sponsor-app-staging-lambdakiq"
+resource "aws_sqs_queue" "sponsor_app_lambdakiq_staging" {
+  name = "sponsor-app-lambdakiq-staging"
 
   redrive_policy = jsonencode({
-    deadLetterTargetArn = aws_sqs_queue.sponsor_app_staging_lambdakiq_dlq.arn
+    deadLetterTargetArn = aws_sqs_queue.sponsor_app_lambdakiq_dlq_staging.arn
     maxReceiveCount     = 13
   })
 
@@ -36,8 +36,8 @@ resource "aws_sqs_queue" "sponsor_app_staging_lambdakiq" {
   }
 }
 
-resource "aws_sqs_queue" "sponsor_app_staging_lambdakiq_dlq" {
-  name = "sponsor-app-staging-lambdakiq-dlq"
+resource "aws_sqs_queue" "sponsor_app_lambdakiq_dlq_staging" {
+  name = "sponsor-app-lambdakiq-dlq-staging"
 
   tags = {
     Environment = "staging"
