@@ -183,6 +183,18 @@ data "aws_iam_policy_document" "sponsor_app" {
       "${aws_s3_bucket.sponsor_app_staging.arn}/*",
     ]
   }
+
+  statement {
+    effect = "Allow"
+    actions = [
+      "logs:CreateLogGroup",
+      "logs:CreateLogStream",
+      "logs:PutLogEvents",
+    ]
+    resources = [
+      "arn:aws:logs:*:${local.kaigionrails_aws_account_id}:log-group:/aws/lambda/*"
+    ]
+  }
 }
 
 resource "aws_iam_role" "sponsor_app_deployer" {
