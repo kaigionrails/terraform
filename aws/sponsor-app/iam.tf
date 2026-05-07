@@ -10,8 +10,11 @@ data "aws_iam_policy_document" "ecs_exec_sponsor_app_trust" {
     effect  = "Allow"
     actions = ["sts:AssumeRole"]
     principals {
-      type        = "Service"
-      identifiers = ["ecs-tasks.amazonaws.com"]
+      type = "Service"
+      identifiers = [
+        "ecs-tasks.amazonaws.com",
+        "lambda.amazonaws.com",
+      ]
     }
     principals {
       type = "AWS"
@@ -45,7 +48,9 @@ data "aws_iam_policy_document" "ecs_exec_sponsor_app" {
       "ecr:BatchGetImage",
       "ecr:DescribeImages",
     ]
-    resources = [aws_ecr_repository.sponsor_app.arn]
+    resources = [
+      aws_ecr_repository.sponsor_app.arn,
+    ]
   }
   statement {
     effect = "Allow"
@@ -92,16 +97,8 @@ data "aws_iam_policy_document" "sponsor_app_trust" {
       type = "Service"
       identifiers = [
         "ecs-tasks.amazonaws.com",
-      ]
-    }
-  }
-  statement {
-    effect  = "Allow"
-    actions = ["sts:AssumeRole"]
-    principals {
-      type = "Service"
-      identifiers = [
-        "tasks.apprunner.amazonaws.com"
+        "tasks.apprunner.amazonaws.com",
+        "lambda.amazonaws.com",
       ]
     }
   }
@@ -113,25 +110,29 @@ resource "aws_iam_role_policy" "sponsor_app" {
 }
 
 data "aws_iam_policy_document" "sponsor_app" {
-  # TODO: SQS
-  # statement {
-  #   effect    = "Allow"
-  #   actions   = [
-  #     "sqs:SendMessage",
-  #     "sqs:ReceiveMessage",
-  #     "sqs:DeleteMessage",
-  #     "sqs:ChangeMessageVisibility",
-  #     "sqs:GetQueueAttributes",
-  #     "sqs:GetQueueUrl",
-  #     ]
-  #   resources = []
-  # }
+  statement {
+    effect = "Allow"
+    actions = [
+      "sqs:SendMessage",
+      "sqs:ReceiveMessage",
+      "sqs:DeleteMessage",
+      "sqs:ChangeMessageVisibility",
+      "sqs:GetQueueAttributes",
+      "sqs:GetQueueUrl",
+    ]
+    resources = [
+      aws_sqs_queue.sponsor_app_lambdakiq.arn,
+      aws_sqs_queue.sponsor_app_lambdakiq_staging.arn,
+    ]
+  }
+
   # statement {
   #   effect  = "Allow"
   #   actions = ["iam:GetRole"]
   #   # resources = ["arn:aws:iam::${local.kaigionrails_aws_account_id}:role/*"]
   #   resources = ["*"]
   # }
+
   statement {
     effect = "Allow"
     actions = [
@@ -179,6 +180,18 @@ data "aws_iam_policy_document" "sponsor_app" {
       "${aws_s3_bucket.sponsor_app.arn}/*",
       aws_s3_bucket.sponsor_app_staging.arn,
       "${aws_s3_bucket.sponsor_app_staging.arn}/*",
+    ]
+  }
+
+  statement {
+    effect = "Allow"
+    actions = [
+      "logs:CreateLogGroup",
+      "logs:CreateLogStream",
+      "logs:PutLogEvents",
+    ]
+    resources = [
+      "arn:aws:logs:*:${local.kaigionrails_aws_account_id}:log-group:/aws/lambda/*"
     ]
   }
 }
@@ -294,6 +307,31 @@ data "aws_iam_policy_document" "sponsor_app_deployer" {
     resources = [
       aws_apprunner_service.sponsor_app.arn,
       aws_apprunner_service.sponsor_app_staging.arn
+    ]
+  }
+  statement {
+    effect = "Allow"
+    actions = [
+      "lambda:UpdateFunctionCode",
+      "lambda:GetFunctionConfiguration",
+    ]
+    resources = [
+      aws_lambda_function.sponsor_app_web.arn,
+      aws_lambda_function.sponsor_app_lambdakiq.arn,
+      aws_lambda_function.sponsor_app_runner.arn,
+      aws_lambda_function.sponsor_app_web_staging.arn,
+      aws_lambda_function.sponsor_app_lambdakiq_staging.arn,
+      aws_lambda_function.sponsor_app_runner_staging.arn,
+    ]
+  }
+  statement {
+    effect = "Allow"
+    actions = [
+      "lambda:InvokeFunction",
+    ]
+    resources = [
+      aws_lambda_function.sponsor_app_runner.arn,
+      aws_lambda_function.sponsor_app_runner_staging.arn,
     ]
   }
 }

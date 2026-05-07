@@ -178,6 +178,20 @@ resource "aws_ssm_parameter" "sponsor_app_tito_api_token" {
   }
 }
 
+resource "random_bytes" "sponsor_app_cloudfront_verify" {
+  length = 64
+}
+
+resource "aws_ssm_parameter" "sponsor_app_cloudfront_verify" {
+  provider = aws.usw2
+  name     = "/sponsor-app/CLOUDFRONT_VERIFY"
+  type     = "SecureString"
+  value    = random_bytes.sponsor_app_cloudfront_verify.base64
+  lifecycle {
+    ignore_changes = [value]
+  }
+}
+
 # staging
 resource "aws_ssm_parameter" "sponsor_app_staging_database_url" {
   provider = aws.usw2
@@ -364,6 +378,20 @@ resource "aws_ssm_parameter" "sponsor_app_staging_tito_api_token" {
   name     = "/sponsor-app-staging/TITO_API_TOKEN"
   type     = "SecureString"
   value    = "TITO_API_TOKEN"
+  lifecycle {
+    ignore_changes = [value]
+  }
+}
+
+resource "random_bytes" "sponsor_app_staging_cloudfront_verify" {
+  length = 64
+}
+
+resource "aws_ssm_parameter" "sponsor_app_staging_cloudfront_verify" {
+  provider = aws.usw2
+  name     = "/sponsor-app-staging/CLOUDFRONT_VERIFY"
+  type     = "SecureString"
+  value    = random_bytes.sponsor_app_staging_cloudfront_verify.base64
   lifecycle {
     ignore_changes = [value]
   }
