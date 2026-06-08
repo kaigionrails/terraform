@@ -115,7 +115,7 @@ resource "cloudflare_dns_record" "cfp_app" {
   zone_id = cloudflare_zone.kaigionrails_org.id
   name    = "cfp"
   type    = "CNAME"
-  content = "qt3zbts8fe.us-west-2.awsapprunner.com"
+  content = "d3rgxun5nc1b8w.cloudfront.net"
   ttl     = 1
 }
 
@@ -133,6 +133,15 @@ resource "cloudflare_dns_record" "origin_cfp_app_aaaa" {
   type    = "AAAA"
   content = "2406:da14:1833:4200:82e6:3d18:9e11:7ff4"
   ttl     = 1
+}
+
+resource "cloudflare_dns_record" "cfp_app_cert_valid_4" {
+  zone_id = cloudflare_zone.kaigionrails_org.id
+  name    = "_02c5bff65d9ee45cea45b68a23a503ed.cfp"
+  type    = "CNAME"
+  content = "_a3ee009c12c80941da54d69d2cf76db7.jkddzztszm.acm-validations.aws"
+  ttl     = 3600
+  comment = "For domain validation by AWS (us-east-1)"
 }
 
 resource "cloudflare_dns_record" "cfp_app_cert_valid_1" {
