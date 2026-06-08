@@ -119,6 +119,22 @@ resource "cloudflare_dns_record" "cfp_app" {
   ttl     = 1
 }
 
+resource "cloudflare_dns_record" "origin_cfp_app_a" {
+  zone_id = cloudflare_zone.kaigionrails_org.id
+  name    = "origin-cfp"
+  type    = "A"
+  content = "57.180.76.61"
+  ttl     = 1
+}
+
+resource "cloudflare_dns_record" "origin_cfp_app_aaaa" {
+  zone_id = cloudflare_zone.kaigionrails_org.id
+  name    = "origin-cfp"
+  type    = "AAAA"
+  content = "2406:da14:1833:4200:82e6:3d18:9e11:7ff4"
+  ttl     = 1
+}
+
 resource "cloudflare_dns_record" "cfp_app_cert_valid_1" {
   zone_id = cloudflare_zone.kaigionrails_org.id
   name    = "_dd32d11fedb954e6e4cc9415bebd3e7e.cfp"
