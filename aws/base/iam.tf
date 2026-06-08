@@ -47,6 +47,7 @@ data "aws_iam_policy_document" "GhaDockerPushToEcrPolicy" {
       "arn:aws:ecr:us-west-2:${data.aws_caller_identity.curent.account_id}:repository/cfp-app",
       "arn:aws:ecr:us-west-2:${data.aws_caller_identity.curent.account_id}:repository/sponsor-app",
       "arn:aws:ecr:us-west-2:${data.aws_caller_identity.curent.account_id}:repository/conference-app",
+      "arn:aws:ecr:ap-northeast-1:${data.aws_caller_identity.curent.account_id}:repository/cfp-app",
     ]
   }
 }
@@ -70,5 +71,38 @@ data "aws_iam_policy_document" "GhaDockerPushToEcrTrustRelation" {
         "repo:kaigionrails/conference-app:*",
       ]
     }
+  }
+}
+
+resource "aws_iam_user" "lightsail_kaigionrails_apps" {
+  name = "LightsailKaigionrailsApps"
+}
+
+resource "aws_iam_user_policy" "lightsail_kaigionrails_apps_cloudwatch_logs" {
+  user   = aws_iam_user.lightsail_kaigionrails_apps.name
+  name   = "LightsailKaigionrailsAppsCloudWatchLogs"
+  policy = data.aws_iam_policy_document.lightsail_kaigionrails_apps_cloudwatch_logs.json
+}
+
+data "aws_iam_policy_document" "lightsail_kaigionrails_apps_cloudwatch_logs" {
+  statement {
+    effect = "Allow"
+    actions = [
+      "logs:CreateLogGroup",
+      "logs:PutRetentionPolicy",
+    ]
+    resources = [
+      "arn:aws:logs:ap-northeast-1:${data.aws_caller_identity.curent.account_id}:log-group:/lightsail/*",
+    ]
+  }
+  statement {
+    effect = "Allow"
+    actions = [
+      "logs:CreateLogStream",
+      "logs:PutLogEvents",
+    ]
+    resources = [
+      "arn:aws:logs:ap-northeast-1:${data.aws_caller_identity.curent.account_id}:log-group:/lightsail/*:log-stream:*",
+    ]
   }
 }
