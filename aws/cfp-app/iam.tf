@@ -313,8 +313,12 @@ data "aws_iam_policy_document" "cfp_app_deployer" {
     resources = ["*"]
   }
   statement {
-    effect  = "Allow"
-    actions = ["ssm:GetParametersByPath"]
+    effect = "Allow"
+    actions = [
+      "ssm:GetParametersByPath",
+      "ssm:GetParameters",
+      "ssm:GetParameter",
+    ]
     resources = [
       "arn:aws:ssm:ap-northeast-1:${local.kaigionrails_aws_account_id}:parameter/cfp-app",
       "arn:aws:ssm:ap-northeast-1:${local.kaigionrails_aws_account_id}:parameter/cfp-app/*",
