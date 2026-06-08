@@ -302,4 +302,36 @@ data "aws_iam_policy_document" "cfp_app_deployer" {
     ]
     resources = [aws_apprunner_service.cfp_app.arn]
   }
+
+  # kamal deploy (GitHub Actions)
+  statement {
+    effect = "Allow"
+    actions = [
+      "ecr:GetAuthorizationToken",
+      "sts:GetServiceBearerToken",
+    ]
+    resources = ["*"]
+  }
+  statement {
+    effect  = "Allow"
+    actions = ["ssm:GetParametersByPath"]
+    resources = [
+      "arn:aws:ssm:ap-northeast-1:${local.kaigionrails_aws_account_id}:parameter/cfp-app",
+      "arn:aws:ssm:ap-northeast-1:${local.kaigionrails_aws_account_id}:parameter/cfp-app/*",
+    ]
+  }
+  statement {
+    effect    = "Allow"
+    actions   = ["kms:Decrypt"]
+    resources = [data.aws_kms_key.apne1_ssm.arn]
+  }
+  statement {
+    effect = "Allow"
+    actions = [
+      "ecr:GetDownloadUrlForLayer",
+      "ecr:BatchCheckLayerAvailability",
+      "ecr:BatchGetImage",
+    ]
+    resources = [aws_ecr_repository.cfp_app_apne1.arn]
+  }
 }
