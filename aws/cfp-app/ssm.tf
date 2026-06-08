@@ -288,3 +288,13 @@ resource "aws_ssm_parameter" "cfp_app_twitter_secret_apne1" {
     ignore_changes = [value]
   }
 }
+
+resource "random_bytes" "cfp_app_cloudfront_origin_secret" {
+  length = 64
+}
+
+resource "aws_ssm_parameter" "cfp_app_cloudfront_origin_secret_apne1" {
+  name  = "/cfp-app/CLOUDFRONT_ORIGIN_SECRET"
+  type  = "SecureString"
+  value = random_bytes.cfp_app_cloudfront_origin_secret.base64
+}
