@@ -50,9 +50,8 @@ resource "cloudflare_dns_record" "conference_app_production" {
   zone_id = cloudflare_zone.kaigionrails_org.id
   name    = "app"
   type    = "CNAME"
-  content = "an5i3pv4yg.us-west-2.awsapprunner.com"
+  content = "d3l6v6sn4stopw.cloudfront.net"
   ttl     = 1
-  proxied = true
 }
 
 resource "cloudflare_dns_record" "origin_conference_app_a" {
