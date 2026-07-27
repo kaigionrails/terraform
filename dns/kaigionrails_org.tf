@@ -111,9 +111,8 @@ resource "cloudflare_dns_record" "conference_app_staging" {
   zone_id = cloudflare_zone.kaigionrails_org.id
   name    = "app-staging"
   type    = "CNAME"
-  content = "kq9tv5ciqp.us-west-2.awsapprunner.com"
+  content = "d33wx14rg6qp26.cloudfront.net"
   ttl     = 1
-  proxied = true
 }
 
 resource "cloudflare_dns_record" "origin_conference_app_staging_a" {
