@@ -270,4 +270,42 @@ data "aws_iam_policy_document" "conference_app_deployer" {
       aws_apprunner_service.conference_app_staging.arn
     ]
   }
+
+  # kamal deploy (GitHub Actions)
+  statement {
+    effect = "Allow"
+    actions = [
+      "ecr:GetAuthorizationToken",
+      "sts:GetServiceBearerToken",
+    ]
+    resources = ["*"]
+  }
+  statement {
+    effect = "Allow"
+    actions = [
+      "ssm:GetParametersByPath",
+      "ssm:GetParameters",
+      "ssm:GetParameter",
+    ]
+    resources = [
+      "arn:aws:ssm:ap-northeast-1:${local.kaigionrails_aws_account_id}:parameter/conference-app",
+      "arn:aws:ssm:ap-northeast-1:${local.kaigionrails_aws_account_id}:parameter/conference-app/*",
+      "arn:aws:ssm:ap-northeast-1:${local.kaigionrails_aws_account_id}:parameter/conference-app-staging",
+      "arn:aws:ssm:ap-northeast-1:${local.kaigionrails_aws_account_id}:parameter/conference-app-staging/*",
+    ]
+  }
+  statement {
+    effect    = "Allow"
+    actions   = ["kms:Decrypt"]
+    resources = [data.aws_kms_key.apne1_ssm.arn]
+  }
+  statement {
+    effect = "Allow"
+    actions = [
+      "ecr:GetDownloadUrlForLayer",
+      "ecr:BatchCheckLayerAvailability",
+      "ecr:BatchGetImage",
+    ]
+    resources = [aws_ecr_repository.conference_app_apne1.arn]
+  }
 }
