@@ -55,6 +55,22 @@ resource "cloudflare_dns_record" "conference_app_production" {
   proxied = true
 }
 
+resource "cloudflare_dns_record" "origin_conference_app_a" {
+  zone_id = cloudflare_zone.kaigionrails_org.id
+  name    = "origin-app"
+  type    = "A"
+  content = "57.180.76.61"
+  ttl     = 1
+}
+
+resource "cloudflare_dns_record" "origin_conference_app_aaaa" {
+  zone_id = cloudflare_zone.kaigionrails_org.id
+  name    = "origin-app"
+  type    = "AAAA"
+  content = "2406:da14:1833:4200:82e6:3d18:9e11:7ff4"
+  ttl     = 1
+}
+
 resource "cloudflare_dns_record" "conference_app_cert_valid_1" {
   zone_id = cloudflare_zone.kaigionrails_org.id
   name    = "_72e72ca487543b43f54be4e6c49247d2.app"
@@ -82,6 +98,15 @@ resource "cloudflare_dns_record" "conference_app_cert_valid_3" {
   comment = "For domain validation by AWS"
 }
 
+resource "cloudflare_dns_record" "conference_app_cert_valid_4" {
+  zone_id = cloudflare_zone.kaigionrails_org.id
+  name    = "_c17145dac9836249fe657aacf13bbcc4.app"
+  type    = "CNAME"
+  content = "_a7b1f56d8b17a0cdc6114e656ff9f281.jkddzztszm.acm-validations.aws"
+  ttl     = 3600
+  comment = "For domain validation by AWS (us-east-1)"
+}
+
 resource "cloudflare_dns_record" "conference_app_staging" {
   zone_id = cloudflare_zone.kaigionrails_org.id
   name    = "app-staging"
@@ -89,6 +114,22 @@ resource "cloudflare_dns_record" "conference_app_staging" {
   content = "kq9tv5ciqp.us-west-2.awsapprunner.com"
   ttl     = 1
   proxied = true
+}
+
+resource "cloudflare_dns_record" "origin_conference_app_staging_a" {
+  zone_id = cloudflare_zone.kaigionrails_org.id
+  name    = "origin-app-staging"
+  type    = "A"
+  content = "57.180.76.61"
+  ttl     = 1
+}
+
+resource "cloudflare_dns_record" "origin_conference_app_staging_aaaa" {
+  zone_id = cloudflare_zone.kaigionrails_org.id
+  name    = "origin-app-staging"
+  type    = "AAAA"
+  content = "2406:da14:1833:4200:82e6:3d18:9e11:7ff4"
+  ttl     = 1
 }
 
 resource "cloudflare_dns_record" "conference_app_staging_cert_valid_1" {
@@ -107,6 +148,15 @@ resource "cloudflare_dns_record" "conference_app_staging_cert_valid_2" {
   content = "_baa4def4ca38ce1c900b469b2e19ea6d.djqtsrsxkq.acm-validations.aws"
   ttl     = 3600
   comment = "For domain validation by AWS"
+}
+
+resource "cloudflare_dns_record" "conference_app_staging_cert_valid_3" {
+  zone_id = cloudflare_zone.kaigionrails_org.id
+  name    = "_b6b4c405ebb853f4323c502f056afa61.app-staging"
+  type    = "CNAME"
+  content = "_367a2823b09350cf58c49d31b261770c.jkddzztszm.acm-validations.aws"
+  ttl     = 3600
+  comment = "For domain validation by AWS (us-east-1)"
 }
 
 ## end conference app
