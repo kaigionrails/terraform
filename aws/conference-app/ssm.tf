@@ -423,6 +423,33 @@ resource "aws_ssm_parameter" "conference_app_staging_vapid_public_key" {
 #############################################################
 ## ap-northeast-1
 
+resource "aws_ssm_parameter" "conference_app_active_record_encryption_deterministic_key_apne1" {
+  name  = "/conference-app/ACTIVE_RECORD_ENCRYPTION_DETERMINISTIC_KEY"
+  type  = "SecureString"
+  value = "ACTIVE_RECORD_ENCRYPTION_DETERMINISTIC_KEY"
+  lifecycle {
+    ignore_changes = [value]
+  }
+}
+
+resource "aws_ssm_parameter" "conference_app_active_record_encryption_key_derivation_salt_apne1" {
+  name  = "/conference-app/ACTIVE_RECORD_ENCRYPTION_KEY_DERIVATION_SALT"
+  type  = "SecureString"
+  value = "ACTIVE_RECORD_ENCRYPTION_KEY_DERIVATION_SALT"
+  lifecycle {
+    ignore_changes = [value]
+  }
+}
+
+resource "aws_ssm_parameter" "conference_app_active_record_encryption_primary_key_apne1" {
+  name  = "/conference-app/ACTIVE_RECORD_ENCRYPTION_PRIMARY_KEY"
+  type  = "SecureString"
+  value = "ACTIVE_RECORD_ENCRYPTION_PRIMARY_KEY"
+  lifecycle {
+    ignore_changes = [value]
+  }
+}
+
 resource "aws_ssm_parameter" "conference_app_cloudflare_access_key_id_apne1" {
   name  = "/conference-app/CLOUDFLARE_ACCESS_KEY_ID"
   type  = "SecureString"
@@ -549,6 +576,69 @@ resource "aws_ssm_parameter" "conference_app_sentry_dsn_apne1" {
   }
 }
 
+resource "aws_ssm_parameter" "conference_app_social_bluesky_app_password_apne1" {
+  name  = "/conference-app/SOCIAL_BLUESKY_APP_PASSWORD"
+  type  = "SecureString"
+  value = "SOCIAL_BLUESKY_APP_PASSWORD"
+  lifecycle {
+    ignore_changes = [value]
+  }
+}
+
+resource "aws_ssm_parameter" "conference_app_social_bluesky_handle_apne1" {
+  name  = "/conference-app/SOCIAL_BLUESKY_HANDLE"
+  type  = "SecureString"
+  value = "SOCIAL_BLUESKY_HANDLE"
+  lifecycle {
+    ignore_changes = [value]
+  }
+}
+
+resource "aws_ssm_parameter" "conference_app_social_mastodon_access_token_apne1" {
+  name  = "/conference-app/SOCIAL_MASTODON_ACCESS_TOKEN"
+  type  = "SecureString"
+  value = "SOCIAL_MASTODON_ACCESS_TOKEN"
+  lifecycle {
+    ignore_changes = [value]
+  }
+}
+
+resource "aws_ssm_parameter" "conference_app_social_mastodon_base_url_apne1" {
+  name  = "/conference-app/SOCIAL_MASTODON_BASE_URL"
+  type  = "SecureString"
+  value = "SOCIAL_MASTODON_BASE_URL"
+  lifecycle {
+    ignore_changes = [value]
+  }
+}
+
+resource "aws_ssm_parameter" "conference_app_social_x_client_id_apne1" {
+  name  = "/conference-app/SOCIAL_X_CLIENT_ID"
+  type  = "SecureString"
+  value = "SOCIAL_X_CLIENT_ID"
+  lifecycle {
+    ignore_changes = [value]
+  }
+}
+
+resource "aws_ssm_parameter" "conference_app_social_x_client_secret_apne1" {
+  name  = "/conference-app/SOCIAL_X_CLIENT_SECRET"
+  type  = "SecureString"
+  value = "SOCIAL_X_CLIENT_SECRET"
+  lifecycle {
+    ignore_changes = [value]
+  }
+}
+
+resource "aws_ssm_parameter" "conference_app_social_x_screen_name_apne1" {
+  name  = "/conference-app/SOCIAL_X_SCREEN_NAME"
+  type  = "SecureString"
+  value = "SOCIAL_X_SCREEN_NAME"
+  lifecycle {
+    ignore_changes = [value]
+  }
+}
+
 resource "aws_ssm_parameter" "conference_app_tito_account_slug_apne1" {
   name  = "/conference-app/TITO_ACCOUNT_SLUG"
   type  = "SecureString"
@@ -595,6 +685,33 @@ resource "aws_ssm_parameter" "conference_app_vapid_public_key_apne1" {
 }
 
 ############################################################
+
+resource "aws_ssm_parameter" "conference_app_staging_active_record_encryption_deterministic_key_apne1" {
+  name  = "/conference-app-staging/ACTIVE_RECORD_ENCRYPTION_DETERMINISTIC_KEY"
+  type  = "SecureString"
+  value = "ACTIVE_RECORD_ENCRYPTION_DETERMINISTIC_KEY"
+  lifecycle {
+    ignore_changes = [value]
+  }
+}
+
+resource "aws_ssm_parameter" "conference_app_staging_active_record_encryption_key_derivation_salt_apne1" {
+  name  = "/conference-app-staging/ACTIVE_RECORD_ENCRYPTION_KEY_DERIVATION_SALT"
+  type  = "SecureString"
+  value = "ACTIVE_RECORD_ENCRYPTION_KEY_DERIVATION_SALT"
+  lifecycle {
+    ignore_changes = [value]
+  }
+}
+
+resource "aws_ssm_parameter" "conference_app_staging_active_record_encryption_primary_key_apne1" {
+  name  = "/conference-app-staging/ACTIVE_RECORD_ENCRYPTION_PRIMARY_KEY"
+  type  = "SecureString"
+  value = "ACTIVE_RECORD_ENCRYPTION_PRIMARY_KEY"
+  lifecycle {
+    ignore_changes = [value]
+  }
+}
 
 resource "aws_ssm_parameter" "conference_app_staging_cloudflare_access_key_id_apne1" {
   name  = "/conference-app-staging/CLOUDFLARE_ACCESS_KEY_ID"
@@ -717,6 +834,69 @@ resource "aws_ssm_parameter" "conference_app_staging_sentry_dsn_apne1" {
   name  = "/conference-app-staging/SENTRY_DSN"
   type  = "SecureString"
   value = "SENTRY_DSN"
+  lifecycle {
+    ignore_changes = [value]
+  }
+}
+
+resource "aws_ssm_parameter" "conference_app_staging_social_bluesky_app_password_apne1" {
+  name  = "/conference-app-staging/SOCIAL_BLUESKY_APP_PASSWORD"
+  type  = "SecureString"
+  value = "SOCIAL_BLUESKY_APP_PASSWORD"
+  lifecycle {
+    ignore_changes = [value]
+  }
+}
+
+resource "aws_ssm_parameter" "conference_app_staging_social_bluesky_handle_apne1" {
+  name  = "/conference-app-staging/SOCIAL_BLUESKY_HANDLE"
+  type  = "SecureString"
+  value = "SOCIAL_BLUESKY_HANDLE"
+  lifecycle {
+    ignore_changes = [value]
+  }
+}
+
+resource "aws_ssm_parameter" "conference_app_staging_social_mastodon_access_token_apne1" {
+  name  = "/conference-app-staging/SOCIAL_MASTODON_ACCESS_TOKEN"
+  type  = "SecureString"
+  value = "SOCIAL_MASTODON_ACCESS_TOKEN"
+  lifecycle {
+    ignore_changes = [value]
+  }
+}
+
+resource "aws_ssm_parameter" "conference_app_staging_social_mastodon_base_url_apne1" {
+  name  = "/conference-app-staging/SOCIAL_MASTODON_BASE_URL"
+  type  = "SecureString"
+  value = "SOCIAL_MASTODON_BASE_URL"
+  lifecycle {
+    ignore_changes = [value]
+  }
+}
+
+resource "aws_ssm_parameter" "conference_app_staging_social_x_client_id_apne1" {
+  name  = "/conference-app-staging/SOCIAL_X_CLIENT_ID"
+  type  = "SecureString"
+  value = "SOCIAL_X_CLIENT_ID"
+  lifecycle {
+    ignore_changes = [value]
+  }
+}
+
+resource "aws_ssm_parameter" "conference_app_staging_social_x_client_secret_apne1" {
+  name  = "/conference-app-staging/SOCIAL_X_CLIENT_SECRET"
+  type  = "SecureString"
+  value = "SOCIAL_X_CLIENT_SECRET"
+  lifecycle {
+    ignore_changes = [value]
+  }
+}
+
+resource "aws_ssm_parameter" "conference_app_staging_social_x_screen_name_apne1" {
+  name  = "/conference-app-staging/SOCIAL_X_SCREEN_NAME"
+  type  = "SecureString"
+  value = "SOCIAL_X_SCREEN_NAME"
   lifecycle {
     ignore_changes = [value]
   }
