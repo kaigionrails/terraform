@@ -549,6 +549,24 @@ resource "aws_ssm_parameter" "conference_app_github_secret_apne1" {
   }
 }
 
+resource "aws_ssm_parameter" "conference_app_google_client_id_apne1" {
+  name  = "/conference-app/GOOGLE_CLIENT_ID"
+  type  = "SecureString"
+  value = "GOOGLE_CLIENT_ID"
+  lifecycle {
+    ignore_changes = [value]
+  }
+}
+
+resource "aws_ssm_parameter" "conference_app_google_client_secret_apne1" {
+  name  = "/conference-app/GOOGLE_CLIENT_SECRET"
+  type  = "SecureString"
+  value = "GOOGLE_CLIENT_SECRET"
+  lifecycle {
+    ignore_changes = [value]
+  }
+}
+
 resource "aws_ssm_parameter" "conference_app_scout_key_apne1" {
   name  = "/conference-app/SCOUT_KEY"
   type  = "SecureString"
@@ -807,6 +825,24 @@ resource "aws_ssm_parameter" "conference_app_staging_github_secret_apne1" {
   name  = "/conference-app-staging/GITHUB_SECRET"
   type  = "SecureString"
   value = "GITHUB_SECRET"
+  lifecycle {
+    ignore_changes = [value]
+  }
+}
+
+resource "aws_ssm_parameter" "conference_app_staging_google_client_id_apne1" {
+  name  = "/conference-app-staging/GOOGLE_CLIENT_ID"
+  type  = "SecureString"
+  value = "GOOGLE_CLIENT_ID"
+  lifecycle {
+    ignore_changes = [value]
+  }
+}
+
+resource "aws_ssm_parameter" "conference_app_staging_google_client_secret_apne1" {
+  name  = "/conference-app-staging/GOOGLE_CLIENT_SECRET"
+  type  = "SecureString"
+  value = "GOOGLE_CLIENT_SECRET"
   lifecycle {
     ignore_changes = [value]
   }
