@@ -657,6 +657,15 @@ resource "aws_ssm_parameter" "conference_app_social_x_screen_name_apne1" {
   }
 }
 
+resource "aws_ssm_parameter" "conference_app_sponsor_visit_token_secret_apne1" {
+  name  = "/conference-app/SPONSOR_VISIT_TOKEN_SECRET"
+  type  = "SecureString"
+  value = "SPONSOR_VISIT_TOKEN_SECRET"
+  lifecycle {
+    ignore_changes = [value]
+  }
+}
+
 resource "aws_ssm_parameter" "conference_app_tito_account_slug_apne1" {
   name  = "/conference-app/TITO_ACCOUNT_SLUG"
   type  = "SecureString"
@@ -933,6 +942,15 @@ resource "aws_ssm_parameter" "conference_app_staging_social_x_screen_name_apne1"
   name  = "/conference-app-staging/SOCIAL_X_SCREEN_NAME"
   type  = "SecureString"
   value = "SOCIAL_X_SCREEN_NAME"
+  lifecycle {
+    ignore_changes = [value]
+  }
+}
+
+resource "aws_ssm_parameter" "conference_app_staging_sponsor_visit_token_secret_apne1" {
+  name  = "/conference-app-staging/SPONSOR_VISIT_TOKEN_SECRET"
+  type  = "SecureString"
+  value = "SPONSOR_VISIT_TOKEN_SECRET"
   lifecycle {
     ignore_changes = [value]
   }
