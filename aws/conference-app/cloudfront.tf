@@ -76,6 +76,28 @@ resource "aws_cloudfront_distribution" "conference_app" {
     viewer_protocol_policy   = "redirect-to-https"
   }
 
+  ordered_cache_behavior {
+    target_origin_id         = "origin-app"
+    path_pattern             = "/rails/active_storage/blobs/proxy/*"
+    allowed_methods          = ["GET", "HEAD"]
+    cached_methods           = ["GET", "HEAD"]
+    compress                 = true
+    cache_policy_id          = data.aws_cloudfront_cache_policy.Managed-CachingOptimized.id
+    origin_request_policy_id = data.aws_cloudfront_origin_request_policy.Managed-AllViewerExceptHostHeader.id
+    viewer_protocol_policy   = "redirect-to-https"
+  }
+
+  ordered_cache_behavior {
+    target_origin_id         = "origin-app"
+    path_pattern             = "/rails/active_storage/representations/proxy/*"
+    allowed_methods          = ["GET", "HEAD"]
+    cached_methods           = ["GET", "HEAD"]
+    compress                 = true
+    cache_policy_id          = data.aws_cloudfront_cache_policy.Managed-CachingOptimized.id
+    origin_request_policy_id = data.aws_cloudfront_origin_request_policy.Managed-AllViewerExceptHostHeader.id
+    viewer_protocol_policy   = "redirect-to-https"
+  }
+
   default_cache_behavior {
     target_origin_id         = "origin-app"
     allowed_methods          = ["DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT"]
@@ -137,6 +159,28 @@ resource "aws_cloudfront_distribution" "conference_app_staging" {
   ordered_cache_behavior {
     target_origin_id         = "origin-app-staging"
     path_pattern             = "/assets/*"
+    allowed_methods          = ["GET", "HEAD"]
+    cached_methods           = ["GET", "HEAD"]
+    compress                 = true
+    cache_policy_id          = data.aws_cloudfront_cache_policy.Managed-CachingOptimized.id
+    origin_request_policy_id = data.aws_cloudfront_origin_request_policy.Managed-AllViewerExceptHostHeader.id
+    viewer_protocol_policy   = "redirect-to-https"
+  }
+
+  ordered_cache_behavior {
+    target_origin_id         = "origin-app-staging"
+    path_pattern             = "/rails/active_storage/blobs/proxy/*"
+    allowed_methods          = ["GET", "HEAD"]
+    cached_methods           = ["GET", "HEAD"]
+    compress                 = true
+    cache_policy_id          = data.aws_cloudfront_cache_policy.Managed-CachingOptimized.id
+    origin_request_policy_id = data.aws_cloudfront_origin_request_policy.Managed-AllViewerExceptHostHeader.id
+    viewer_protocol_policy   = "redirect-to-https"
+  }
+
+  ordered_cache_behavior {
+    target_origin_id         = "origin-app-staging"
+    path_pattern             = "/rails/active_storage/representations/proxy/*"
     allowed_methods          = ["GET", "HEAD"]
     cached_methods           = ["GET", "HEAD"]
     compress                 = true
