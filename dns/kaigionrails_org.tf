@@ -316,6 +316,14 @@ resource "cloudflare_dns_record" "sponsor_app_staigng_cert_valid_4" {
 }
 
 ## signage-app
+resource "cloudflare_dns_record" "signage_app_cname" {
+  zone_id = cloudflare_zone.kaigionrails_org.id
+  name    = "signage"
+  type    = "CNAME"
+  content = "d2sadrkd6qaren.cloudfront.net"
+  ttl     = 1
+}
+
 resource "cloudflare_dns_record" "signage_app_dev_cname" {
   zone_id = cloudflare_zone.kaigionrails_org.id
   name    = "signage-dev"
