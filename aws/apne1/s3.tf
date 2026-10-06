@@ -41,6 +41,30 @@ data "aws_iam_policy_document" "kaigionrails_logs_logging_policy" {
       values   = ["arn:aws:elasticloadbalancing:*:*:loadbalancer/*"]
     }
   }
+
+  statement {
+    actions   = ["s3:PutObject"]
+    resources = ["${aws_s3_bucket.kaigionrails_logs.arn}/cloudfront/*"]
+    principals {
+      type        = "Service"
+      identifiers = ["delivery.logs.amazonaws.com"]
+    }
+    condition {
+      test     = "StringEquals"
+      variable = "s3:x-amz-acl"
+      values   = ["bucket-owner-full-control"]
+    }
+    condition {
+      test     = "StringEquals"
+      variable = "aws:SourceAccount"
+      values   = [data.aws_caller_identity.current.account_id]
+    }
+    condition {
+      test     = "ArnLike"
+      variable = "aws:SourceArn"
+      values   = ["arn:aws:logs:us-east-1:${data.aws_caller_identity.current.account_id}:delivery-source:*"]
+    }
+  }
 }
 
 resource "aws_s3_bucket_policy" "kaigionrails_logs_logging_policy" {
