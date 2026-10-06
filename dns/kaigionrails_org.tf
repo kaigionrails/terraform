@@ -315,6 +315,15 @@ resource "cloudflare_dns_record" "sponsor_app_staigng_cert_valid_4" {
   comment = "For domain validation by AWS (us-east-1)"
 }
 
+## signage-app
+resource "cloudflare_dns_record" "signage_app_dev_cname" {
+  zone_id = cloudflare_zone.kaigionrails_org.id
+  name    = "signage-dev"
+  type    = "CNAME"
+  content = "d1ozqdminy5jm8.cloudfront.net"
+  ttl     = 1
+}
+
 resource "cloudflare_dns_record" "signage_dev_cert_valid" {
   zone_id = cloudflare_zone.kaigionrails_org.id
   name    = "_30f398799817acbccac10b701d6fa1da.signage-dev"
