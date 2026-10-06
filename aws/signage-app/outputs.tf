@@ -1,3 +1,12 @@
+output "signage_app_frontend_config" {
+  value     = local.signage_app_frontend_config
+  sensitive = true
+}
+
+output "signage_app_cloudfront_domain_name" {
+  value = aws_cloudfront_distribution.signage_app.domain_name
+}
+
 output "signage_app_dev_frontend_config" {
   value     = local.signage_app_dev_frontend_config
   sensitive = true
