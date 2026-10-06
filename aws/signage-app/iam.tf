@@ -667,3 +667,54 @@ resource "aws_iam_role_policy_attachment" "signage_app_dev_iot_handler_lambda_ba
   role       = aws_iam_role.signage_app_dev_iot_handler.name
   policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
 }
+
+data "aws_iam_openid_connect_provider" "github_actions" {
+  url = "https://token.actions.githubusercontent.com"
+}
+
+resource "aws_iam_role" "signage_app_deployer" {
+  name                 = "${local.signage_app.iam_role_prefix}Deployer"
+  assume_role_policy   = data.aws_iam_policy_document.signage_app_deployer_trust.json
+  max_session_duration = 3600
+}
+
+data "aws_iam_policy_document" "signage_app_deployer_trust" {
+  statement {
+    effect  = "Allow"
+    actions = ["sts:AssumeRoleWithWebIdentity"]
+    principals {
+      type        = "Federated"
+      identifiers = [data.aws_iam_openid_connect_provider.github_actions.arn]
+    }
+    condition {
+      test     = "StringEquals"
+      variable = "token.actions.githubusercontent.com:sub"
+      # The repository uses immutable subject claims (owner@id/repo@id)
+      values = ["repo:kaigionrails@62695404/signage-app@1407623682:environment:prd"]
+    }
+    condition {
+      test     = "StringEquals"
+      variable = "token.actions.githubusercontent.com:aud"
+      values   = ["sts.amazonaws.com"]
+    }
+  }
+}
+
+resource "aws_iam_role_policy" "signage_app_deployer" {
+  role   = aws_iam_role.signage_app_deployer.id
+  name   = "SignageAppDeployer"
+  policy = data.aws_iam_policy_document.signage_app_deployer.json
+}
+
+data "aws_iam_policy_document" "signage_app_deployer" {
+  statement {
+    effect    = "Allow"
+    actions   = ["s3:ListBucket"]
+    resources = [aws_s3_bucket.signage_app.arn]
+  }
+  statement {
+    effect    = "Allow"
+    actions   = ["s3:GetObject", "s3:PutObject", "s3:DeleteObject"]
+    resources = ["${aws_s3_bucket.signage_app.arn}/ui/*"]
+  }
+}
