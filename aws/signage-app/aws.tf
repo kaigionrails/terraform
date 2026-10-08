@@ -1,0 +1,33 @@
+terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 6.0"
+    }
+    archive = {
+      source = "hashicorp/archive"
+    }
+  }
+}
+
+locals {
+  kaigionrails_aws_account_id = "861452569180"
+}
+
+provider "aws" {
+  region              = "ap-northeast-1"
+  allowed_account_ids = [local.kaigionrails_aws_account_id]
+
+  default_tags {
+    tags = {
+      "Project" = "kaigionrails"
+    }
+  }
+}
+
+data "aws_caller_identity" "current" {}
+data "aws_region" "current" {}
+
+data "aws_iot_endpoint" "current" {
+  endpoint_type = "iot:Data-ATS"
+}

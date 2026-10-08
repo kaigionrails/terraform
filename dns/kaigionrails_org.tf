@@ -315,6 +315,41 @@ resource "cloudflare_dns_record" "sponsor_app_staigng_cert_valid_4" {
   comment = "For domain validation by AWS (us-east-1)"
 }
 
+## signage-app
+resource "cloudflare_dns_record" "signage_app_cname" {
+  zone_id = cloudflare_zone.kaigionrails_org.id
+  name    = "signage"
+  type    = "CNAME"
+  content = "d2sadrkd6qaren.cloudfront.net"
+  ttl     = 1
+}
+
+resource "cloudflare_dns_record" "signage_app_dev_cname" {
+  zone_id = cloudflare_zone.kaigionrails_org.id
+  name    = "signage-dev"
+  type    = "CNAME"
+  content = "d1ozqdminy5jm8.cloudfront.net"
+  ttl     = 1
+}
+
+resource "cloudflare_dns_record" "signage_dev_cert_valid" {
+  zone_id = cloudflare_zone.kaigionrails_org.id
+  name    = "_30f398799817acbccac10b701d6fa1da.signage-dev"
+  type    = "CNAME"
+  content = "_b05a48bb6fb2ea570074f9509e2bebfb.wzccmgtwzk.acm-validations.aws"
+  ttl     = 3600
+  comment = "For domain validation by AWS (us-east-1)"
+}
+
+resource "cloudflare_dns_record" "signage_cert_valid" {
+  zone_id = cloudflare_zone.kaigionrails_org.id
+  name    = "_9cca4482b680f46b05169cd9cc463a92.signage"
+  type    = "CNAME"
+  content = "_80c6ed04e0e7341b6550b35966055ba7.wzccmgtwzk.acm-validations.aws"
+  ttl     = 3600
+  comment = "For domain validation by AWS (us-east-1)"
+}
+
 resource "cloudflare_dns_record" "mx_google" {
   zone_id  = cloudflare_zone.kaigionrails_org.id
   name     = "kaigionrails.org"
